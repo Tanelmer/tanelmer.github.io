@@ -590,8 +590,8 @@
             var sliderWidth = numSlides * 100;
             var slideWidth = 100 / numSlides;
 
-            slides.wrapAll('<div class="' + SLIDES_CONTAINER + '">');
-            slides.parent().wrap('<div class="' + SLIDES_WRAPPER + '">');
+            slides.wrapAll('<div class="' + SLIDES_CONTAINER + '" />');
+            slides.parent().wrap('<div class="' + SLIDES_WRAPPER + '" />');
 
             section.find(SLIDES_CONTAINER_SEL).css('width', sliderWidth + '%');
 
@@ -1947,9 +1947,9 @@
                 //creating the scrolling
                 else{
                     if(options.verticalCentered){
-                        element.find(TABLE_CELL_SEL).wrapInner('<div class="' + SCROLLABLE + '">');
+                        element.find(TABLE_CELL_SEL).wrapInner('<div class="' + SCROLLABLE + '" />');
                     }else{
-                        element.wrapInner('<div class="' + SCROLLABLE + '">');
+                        element.wrapInner('<div class="' + SCROLLABLE + '" />');
                     }
 
                     element.find(SCROLLABLE_SEL).slimScroll({
@@ -1977,7 +1977,7 @@
         }
 
         function addTableClass(element){
-            element.addClass(TABLE).wrapInner('<div class="' + TABLE_CELL + '" style="height:' + getTableHeight(element) + 'px;">');
+            element.addClass(TABLE).wrapInner('<div class="' + TABLE_CELL + '" style="height:' + getTableHeight(element) + 'px;" />');
         }
 
         function getTableHeight(element){
@@ -2302,7 +2302,7 @@
         }
 
         /*
-        * Returns and object with Microsoft pointers (for IE<11 and="" for="" ie="">= 11)
+        * Returns and object with Microsoft pointers (for IE<11 and for IE >= 11)
         * http://msdn.microsoft.com/en-us/library/ie/dn304886(v=vs.85).aspx
         */
         function getMSPointer(){
@@ -2556,4 +2556,3 @@
         }
     };
 });
-</11></div></div></div></div></div>
