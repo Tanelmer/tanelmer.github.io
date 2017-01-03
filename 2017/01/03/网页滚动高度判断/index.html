@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Archives | elmer - 尘埃落定</title>
+  <title>js计算网页滚动高度 | elmer - 尘埃落定</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -178,96 +178,57 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/01/03/网页滚动高度判断/">js计算网页滚动高度</a></h4>
-                            
-                            <p><time datetime="2017-01-03T10:43:10.090Z"><a href="/2017/01/03/网页滚动高度判断/">2017-01-03</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/01/03/JS-error/">JS异常处理</a></h4>
-                            
-                            <p><time datetime="2017-01-03T09:40:03.544Z"><a href="/2017/01/03/JS-error/">2017-01-03</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/12/29/AmdorCmd/">关于AMD&amp;CMD - elmer</a></h4>
-                            
-                            <p><time datetime="2016-12-29T09:26:21.856Z"><a href="/2016/12/29/AmdorCmd/">2016-12-29</a></time></p>
-                        </div>
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2016/12/24/hello-world/">hexo - hello elmer</a></h4>
-                            
-                            <p><time datetime="2016-12-24T08:30:45.320Z"><a href="/2016/12/24/hello-world/">2016-12-24</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-01-03T10:43:10.090Z" itemprop="datePublished">
+          2017-01-03
+      </time>
+    
+</span>
+                <h1>js计算网页滚动高度</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h3 id="网页滚动高度"><a href="#网页滚动高度" class="headerlink" title="网页滚动高度"></a>网页滚动高度</h3><p>判断滚动条到底部，需要用到DOM的三个属性值，即scrollTop、clientHeight、scrollHeight。<br><a id="more"></a><br>scrollTop为滚动条在Y轴上的滚动距离。<br>clientHeight为内容可视区域的高度。<br>scrollHeight为内容可视区域的高度加上溢出（滚动）的距离。<br>从这个三个属性的介绍就可以看出来，滚动条到底部的条件即为scrollTop + clientHeight == scrollHeight。<br>废话不多少说，赶紧上代码（兼容不同的浏览器）。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//滚动条在Y轴上的滚动距离</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">getScrollTop</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	　　<span class="keyword">var</span> scrollTop = <span class="number">0</span>, bodyScrollTop = <span class="number">0</span>, documentScrollTop = <span class="number">0</span>;</div><div class="line">	　　<span class="keyword">if</span>(<span class="built_in">document</span>.body)&#123;</div><div class="line">	　　　　bodyScrollTop = <span class="built_in">document</span>.body.scrollTop;</div><div class="line">	　　&#125;</div><div class="line">	　　<span class="keyword">if</span>(<span class="built_in">document</span>.documentElement)&#123;</div><div class="line">	　　　　documentScrollTop = <span class="built_in">document</span>.documentElement.scrollTop;</div><div class="line">	　　&#125;</div><div class="line">	　　scrollTop = (bodyScrollTop - documentScrollTop &gt; <span class="number">0</span>) ? bodyScrollTop : documentScrollTop;</div><div class="line">	　　<span class="keyword">return</span> scrollTop;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//文档的总高度</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">getScrollHeight</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	　　<span class="keyword">var</span> scrollHeight = <span class="number">0</span>, bodyScrollHeight = <span class="number">0</span>, documentScrollHeight = <span class="number">0</span>;</div><div class="line">	　　<span class="keyword">if</span>(<span class="built_in">document</span>.body)&#123;</div><div class="line">	　　　　bodyScrollHeight = <span class="built_in">document</span>.body.scrollHeight;</div><div class="line">	　　&#125;</div><div class="line">	　　<span class="keyword">if</span>(<span class="built_in">document</span>.documentElement)&#123;</div><div class="line">	　　　　documentScrollHeight = <span class="built_in">document</span>.documentElement.scrollHeight;</div><div class="line">	　　&#125;</div><div class="line">	　　scrollHeight = (bodyScrollHeight - documentScrollHeight &gt; <span class="number">0</span>) ? bodyScrollHeight : documentScrollHeight;</div><div class="line">	　　<span class="keyword">return</span> scrollHeight;</div><div class="line">	&#125;</div><div class="line">	<span class="comment">//浏览器视口的高度</span></div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">getWindowHeight</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	　　<span class="keyword">var</span> windowHeight = <span class="number">0</span>;</div><div class="line">	　　<span class="keyword">if</span>(<span class="built_in">document</span>.compatMode == <span class="string">"CSS1Compat"</span>)&#123;</div><div class="line">	　　　　windowHeight = <span class="built_in">document</span>.documentElement.clientHeight;</div><div class="line">	　　&#125;<span class="keyword">else</span>&#123;</div><div class="line">	　　　　windowHeight = <span class="built_in">document</span>.body.clientHeight;</div><div class="line">	　　&#125;</div><div class="line">	　　<span class="keyword">return</span> windowHeight;</div><div class="line">	&#125;</div><div class="line">	<span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	　　<span class="keyword">if</span>(getScrollTop() + getWindowHeight() == getScrollHeight())&#123;</div><div class="line">	　　　　alert(<span class="string">"you are in the bottom!"</span>);</div><div class="line">	　　&#125;</div><div class="line">	&#125;;</div><div class="line">	<span class="comment">//Jq写法</span></div><div class="line">	$(<span class="built_in">window</span>).scroll(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	　　<span class="keyword">var</span> scrollTop = $(<span class="keyword">this</span>).scrollTop();</div><div class="line">	　　<span class="keyword">var</span> scrollHeight = $(<span class="built_in">document</span>).height();</div><div class="line">	　　<span class="keyword">var</span> windowHeight = $(<span class="keyword">this</span>).height();</div><div class="line">	　　<span class="keyword">if</span>(scrollTop + windowHeight == scrollHeight)&#123;</div><div class="line">	　　　　alert(<span class="string">"you are in the bottom"</span>);</div><div class="line">	　　&#125;</div><div class="line">	&#125;);</div></pre></td></tr></table></figure></p>
+<p>如果要判断在某一个元素中的滚动条是否到底部，根据类似的思想，将document.body换成特定的元素即可，获取scrollTop和scrollHeight的方式是一样的，但是获取元素可见高度需要用到offsetHeight属性，直接依葫芦画瓢即可。</p>
+<blockquote>
+<p><a href="http://www.jb51.net/article/42744.htm" target="_blank" rel="external">http://www.jb51.net/article/42744.htm</a></p>
+</blockquote>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>生命不息，奋斗不止，fighting。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/01/03/JS-error/">
+        JS异常处理 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2017/01/03/网页滚动高度判断/" data-title="js计算网页滚动高度" data-url="http://yoursite.com/2017/01/03/网页滚动高度判断/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"duoshuo_name"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
