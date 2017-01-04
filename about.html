@@ -1,0 +1,158 @@
+<!doctype html>
+<html>
+<head lang="en">
+    <!--声明当前页面的编码集：charset=gbk,gb2312(中文编码)，utf-8国际编码-->
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=0.8, minimum-scale=0.8, maximum-scale=0.8, user-scalable=no"/>
+    <!--当前页面的三要素-->
+    <title>Resume</title>
+    <meta name="Keywords" content="关键词,关键词">
+    <meta name="description" content="">
+    <meta name="author" content="elmer">
+    <link href="icon.ico" rel="shortcut icon">
+    <link rel="stylesheet" href="css/resume.css" type="text/css">
+    <link rel="stylesheet" href="css/jquery.fullPage.css" type="text/css">
+    <script src="/js/jquery-1.11.1.min.js"></script>
+    <script src="js/jquery.fullPage.js"></script>
+</head>
+<body>
+<div id="fullpage">
+    <div class="section">
+        <div class="intro">
+            <img src="img/pho.jpg">
+
+            <h1>李欣羿</h1>
+
+            <p id="motto">生活的理想，那就是理想的生活!</p>
+
+            <h3 id="profession">Web前端攻城狮</h3>
+
+            <p id="index"><a href="javascript:history.go(-1);" target="_blank">个人博客~</a></p>
+        </div>
+    </div>
+    <div class="section">
+        <div class="edu">
+            <h1>教育背景</h1>
+
+            <p>湖南工程学院 本科</p>
+
+            <p>计算机与通信学院 网络工程专业</p>
+
+            <h2>
+                <em>2016年6月</em>毕业
+            </h2>
+
+            <h3>
+                <a href="mailto:244lixinyi@163.com" target="_blank">大神们，膜拜=。=</a>
+            </h3>
+        </div>
+    </div>
+    <div class="section">
+        <div class="workexp">
+            <h1>工作经历</h1>
+            <p><a href="http://www.alltuu.com">杭州喔影网络科技有限公司</a></p>
+            <p>职位：前端开发工程师</p>
+            <p>职责：主要负责公司pc，移动端网页开发，微信开发</p>
+            <p>前期pc业务，后期因需求转到移动。</p>
+            <h2>
+                <em>time:2016年1月-12月</em>
+            </h2>
+        </div>
+    </div>
+    <div class="section">
+        <div class="project">
+           
+        </div>
+    </div>
+    <div class="section">
+        <div class="skill">
+            <h1>擅长技能</h1>
+
+            <div class="tag">
+                <div>Html</div>
+                <div>Css</div>
+            </div>
+            <div class="tag">
+                <div>Javascript</div>
+                <div>jQuery</div>
+                <div>Bootstrap</div>
+                <div>web前端</div>
+            </div>
+            <div class="tag">
+                <div>html5</div>
+                <div>Css3</div>
+                <div>web重构</div>
+                <div>Vue</div>
+            </div>
+            <div class="tag">
+                <div>Java</div>
+                <div>web开发</div>
+                <div>Jsp</div>
+            </div>
+            <div class="tag">
+                <div>Git</div>
+                <div>Zepto</div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="section">
+        <div class="pro">
+            <h1>理想职位</h1>
+            <h3>前端工程师</h3>
+            <p>当然，希望公司里有个UI会比较好，并不精通PS（只会切切图）。^_^</p>
+            <h4>工作地点:杭州，广州，深圳, 长沙。</h4>
+            <p>如果你觉得还可以</p>
+            <p><a href="mailto:244lixinyi@163.com" target="_blank">聘用我吧！</a></p>
+        </div>
+    </div>
+    <div class="section">
+        <div class="link">
+            <h1>联系方式</h1>
+            <p><a href="javascript:void(0)">E-mail:244lixinyi@163.com</a></p>
+            <p>Tel:18373265876</p>
+            <p>QQ:598203949</p>
+        </div>
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#fullpage").fullpage({
+            "verticalCentered": true,
+            "resize": false,
+            "sectionsColor": ["#029672", "#029672", "#029672", "#029672", "#029672", "#029672","#029672"],
+            "easing": "easeInQuart",
+            anchors: ['1', '2', '3', '4', '5', '6','7'],
+            'navigation': true,
+            'navigationPosition': 'right',
+            'navigationTooltips': ['首页', '教育','工作', '项目', '技能', '求职', '联系'],
+            afterLoad: function(anchorLink, index){
+				if(index == 2){
+				}
+				if(index == 3){
+				}
+				if(index == 4){
+				}
+			},
+			onLeave: function(index, direction){
+				if(index == '2'){
+				}
+				if(index == '3'){
+				}
+				if(index == '4'){
+				}
+			}
+        })
+        $(".project>.demo").find("img").click(function(){
+            $(".project>.shadow").fadeIn("slow");
+        });
+        $("#close").click(function(){
+            $(".project>.shadow").fadeOut("slow");
+            setTimeout(function(){
+            	window.location.href = 'https://github.com/Tanelmer/CVDemo';
+            },300);
+        })
+    })
+</script>
+</body>
+</html>
