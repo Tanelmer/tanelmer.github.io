@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>移动前端tap事件点透解决方案 | elmer - 尘埃落定</title>
+  <title>JS中math，string对象理解 | elmer - 尘埃落定</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -199,51 +199,42 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2017-01-06T02:33:54.402Z" itemprop="datePublished">
-          2017-01-06
+      <time datetime="2017-01-07T02:18:34.033Z" itemprop="datePublished">
+          2017-01-07
       </time>
     
     
     | 
-    <a href='/tags/JavaScript/'>JavaScript</a>
+    <a href='/tags/Javascript/'>Javascript</a>
     
     
 </span>
-                <h1>移动前端tap事件点透解决方案</h1>
+                <h1>JS中math，string对象理解</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h3 id="移动前端tap事件问题解决或替代方案"><a href="#移动前端tap事件问题解决或替代方案" class="headerlink" title="移动前端tap事件问题解决或替代方案"></a>移动前端tap事件问题解决或替代方案</h3><p>tap轻触事件，对于做移动前端的同学们大多来说都不陌生了，但zepto在封装tap的时候有点小瑕疵，以至于产生了tap点透，那什么是tap点透呢？<br><a id="more"></a></p>
-<hr>
-<h2 id="问题描述："><a href="#问题描述：" class="headerlink" title="问题描述："></a>问题描述：</h2><p>tap事件的出现是为了解决移动click延迟300ms响应问题，而点透问题的产生是因为zepto把touch事件绑定在document上，所以冒泡就等于阻止不了，因为document已经在最上层了，所以tap事件在触发时有可能触发到非当前层级，以至出现点透。</p>
-<h2 id="解决："><a href="#解决：" class="headerlink" title="解决："></a>解决：</h2><ol>
-<li><p>使用替代方案，github有个fastclick.js，这个库能替代click事件，解决了click延迟响应。</p>
+      		<h3 id="Math对象的一些常用方法"><a href="#Math对象的一些常用方法" class="headerlink" title="Math对象的一些常用方法"></a>Math对象的一些常用方法</h3><p>PI:3.1415926…..<br>abs(x) 返回数字的相对值<br>ceil(x) 返回 x 四舍五入后的最大整数<br>floor(x) 返回 x 四舍五入后的最小整数<br>max(x,y) 返回 x 和 y 之间较大的数<br>min(x,y) 返回 x 和 y 之间较小的数<br>random() 返回位于 0 到 1 之间的随机函数<br><a id="more"></a></p>
+<h2 id="指定范围内随机数"><a href="#指定范围内随机数" class="headerlink" title="指定范围内随机数"></a>指定范围内随机数</h2><p>1产生一个0-max的随机数<br>// max - 期望的最大值<br>parseInt(Math.random()<em>(max+1),10);<br>Math.floor(Math.random()</em>(max+1));<br>2产生一个1-max的随机数<br>// max - 期望的最大值<br>parseInt(Math.random()<em>max,10)+1;<br>Math.floor(Math.random()</em>max)+1;<br>Math.ceil(Math.random()<em>max);<br>3产生一个min-max的随机数<br>// max - 期望的最大值<br>// min - 期望的最小值<br>parseInt(Math.random()</em>(max-min+1)+min,10);<br>Math.floor(Math.random()*(max-min+1)+min);<br>round(x) 四舍五进后与整<br>pow(x,y) 返回 y^x 的值</p>
 <blockquote>
-<p>因为他事件是绑定到document上，先touchstart然后touchend，根据touchstart的event参数判断该dom是否注册了tap事件，有就触发，于是问题来了，zepto的touchend这里有个event参数，我们event.preventDefault()，这里本来都是最上层了，这就代码压根没什么用，但是fastclick处理办法不可谓不巧妙，这个库直接在touchend的时候就触发了dom上的click事件而替换了本来的触发时间，意思是原来要350-400ms执行的代码突然就移到了50-100ms，然后这里虽然使用了touch事件但是touch事件是绑定到了具体dom而不是document上，所以e.preventDefault是有效的，我们可以阻止冒泡，也可以阻止浏览器默认事件，这个才是fastclick的精华部分，不可谓不高啊！！！<br>github地址:<a href="https://github.com/ftlabs/fastclick" target="_blank" rel="external">https://github.com/ftlabs/fastclick</a></p>
+<p>Math 对象并不像 Date 和 String 那样是对象的类，因此没有构造函数 Math()，像 Math.sin() 这样的函数只是函数，不是某个对象的方法。您无需创建它，通过把 Math 作为对象使用就可以调用其所有属性和方法。</p>
 </blockquote>
-</li>
-<li><p>touchend事件替代tap事件<br>因为tap是绑在document上，所以才会点透，touchend可绑在dom上，用even.preventDefault()可以阻止冒泡，防止点透。</p>
-</li>
-</ol>
+<hr>
+<h3 id="String对象的一些常用方法"><a href="#String对象的一些常用方法" class="headerlink" title="String对象的一些常用方法"></a>String对象的一些常用方法</h3><p>String<br>toLowerCase() 把字符串中的文本变成小写<br>toUpperCase() 把字符串中的文本变成大写<br>split(delimiter)将字符串分配为数组<br>substr(startIndex, length) 从startIndex与,取length个字符<br>substring(startIndex, endIndex) 从startIndex和endIndex之间的字符,没有包含endIndex<br>indexOf(searchString, startIndex) 返回字符串中第一个呈现指定字符串的地位<br>lastlndexOf(searchString, startIndex) 返回字符串中最后一个呈现指定字符串的地位<br>charAt(index) 返回指定索引处的字符<br>replace(regex, newString)将字符串中的某些字符替代成其它字符</p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2017/01/07/JS-Math&Str/" style="float: left;">
-        ← JS中math，string对象理解
-    </a>
     
-    
-    <a class="pull-right" href="/2017/01/04/consoleZ/">
-        consoleZ - 你值得拥有的Windows系统命令行工具 →
+    <a class="pull-right" href="/2017/01/06/tap点透处理/">
+        移动前端tap事件点透解决方案 →
     </a>
     
 </nav>
 
         <div class="duoshuo">
-<div class="ds-thread" data-thread-key="2017/01/06/tap点透处理/" data-title="移动前端tap事件点透解决方案" data-url="https://tanelmer.github.io/2017/01/06/tap点透处理/"></div>
+<div class="ds-thread" data-thread-key="2017/01/07/JS-Math&amp;Str/" data-title="JS中math，string对象理解" data-url="https://tanelmer.github.io/2017/01/07/JS-Math&amp;Str/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"elmer"};
 (function() {
