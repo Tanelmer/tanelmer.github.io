@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>About elmer | elmer - 尘埃落定</title>
+  <title>JQuery-rolling无缝向上滚动 | elmer - 尘埃落定</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -193,104 +193,63 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p><b style="color:#fff;">每一个不曾起舞的日子都是对生命的辜负</b>。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
+      
 <section id="intro">
     <div class="container">
         <div class="row col-md-offset-2">
             <div class="col-md-8">
-                <h1>About elmer</h1>
+    			<span class="post-meta">
+      <time datetime="2017-01-13T04:49:27.972Z" itemprop="datePublished">
+          2017-01-13
+      </time>
+    
+    
+    | 
+    <a href='/tags/JavaScript，JQuery/'>JavaScript，JQuery</a>
+    
+    
+</span>
+                <h1>JQuery-rolling无缝向上滚动</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <p>self-introduction</p>
+      		<h3 id="对于JQuery-rolling插件的思考"><a href="#对于JQuery-rolling插件的思考" class="headerlink" title="对于JQuery-rolling插件的思考"></a>对于JQuery-rolling插件的思考</h3><p>确实~我是个菜鸟，这点不用多说~大神请绕道，不然就班门弄斧了~~</p>
+<a id="more"></a>
+<p><em>应用场景：</em>一般用于信息展示窗口 向上无缝滚动  &gt; <a href="http://www.jq22.com/yanshi6631" target="_blank" rel="external">演示地址</a></p>
+<p><em>大致实现思路：</em>用animate往上滚（marginTop） 1px，需要注意的是动画回调里写的玩意，这是实现无缝的精华,然后就是跑定时器，为啥要用遍历去包裹定时器我还没弄懂，我去掉遍历demo跑起来也没问题，然后看遍历影响的是intId这个定时器对象数组，估计是出于性能方面的考究，清除定时器只清除对应的？还不是特别懂，希望有懂的朋友告知，然后继续学习吧~</p>
+<p><em>感悟：</em>之前在公司也有写过这种业务需求的小插件，思路大体类似，用的scrollTop这个属性，这玩意不好的地方就是会产生滚动条，无缝实现起来没那么容易，而且animate动画不支持，然后就不流畅~，滚一行是一行，滚到底了又重新回到顶上继续滚，然后突然觉得<strong>对于一个问题，想出解决办法可能不是难事，想出最佳的解决办法才是比较难的~</strong>，所以关于思想，算法的考虑就尤为重要了吧~算法=。=~~</p>
 <hr>
-<p><img src="http://www.lgstatic.com/i/image/M00/7F/B5/Cgp3O1hOmIeAOORbAAkRJlDV18U889.jpg" alt="avatar" width="120" heigth="120" title="avatar" style="border-radius:50%"></p>
-<p><em>梦想不会远，只要你敢追</em><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> Person = &#123;</div><div class="line">	<span class="attr">name</span>:<span class="string">"李欣羿"</span>,</div><div class="line">	<span class="attr">age</span>:<span class="number">23</span>,</div><div class="line">	<span class="attr">sex</span>:<span class="string">"1"</span>,</div><div class="line">	<span class="attr">addr</span>:<span class="string">"浙江杭州"</span>,</div><div class="line">	<span class="attr">edu</span>:<span class="string">"本科"</span>,</div><div class="line">	<span class="attr">tel</span>:<span class="number">18373265876</span>,</div><div class="line">	<span class="attr">email</span>:<span class="string">"244lixinyi@163.com"</span>,</div><div class="line">	<span class="attr">profession</span>:<span class="string">"Front-end Engineer"</span></div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>JavaScript：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// JavaScript Document</span></div><div class="line">	(<span class="function"><span class="keyword">function</span>(<span class="params">$</span>)</span>&#123;</div><div class="line">		$.fn.myScroll = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>)</span>&#123;</div><div class="line">		<span class="comment">//默认配置</span></div><div class="line">		<span class="keyword">var</span> defaults = &#123;</div><div class="line">			<span class="attr">speed</span>:<span class="number">40</span>,  <span class="comment">//滚动速度,值越大速度越慢</span></div><div class="line">			rowHeight:<span class="number">24</span> <span class="comment">//每行的高度</span></div><div class="line">		&#125;;</div><div class="line">		</div><div class="line">		<span class="keyword">var</span> opts = $.extend(&#123;&#125;, defaults, options),intId = [];</div><div class="line">		</div><div class="line">		<span class="function"><span class="keyword">function</span> <span class="title">marquee</span>(<span class="params">obj, step</span>)</span>&#123;</div><div class="line">		</div><div class="line">			obj.find(<span class="string">"ul"</span>).animate(&#123;</div><div class="line">				<span class="attr">marginTop</span>: <span class="string">'-=1'</span></div><div class="line">			&#125;,<span class="number">0</span>,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">					<span class="keyword">var</span> s = <span class="built_in">Math</span>.abs(<span class="built_in">parseInt</span>($(<span class="keyword">this</span>).css(<span class="string">"margin-top"</span>)));</div><div class="line">					<span class="keyword">if</span>(s &gt;= step)&#123;</div><div class="line">						$(<span class="keyword">this</span>).find(<span class="string">"li"</span>).slice(<span class="number">0</span>, <span class="number">1</span>).appendTo($(<span class="keyword">this</span>));</div><div class="line">						$(<span class="keyword">this</span>).css(<span class="string">"margin-top"</span>, <span class="number">0</span>);</div><div class="line">					&#125;</div><div class="line">				&#125;);</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">			<span class="keyword">this</span>.each(<span class="function"><span class="keyword">function</span>(<span class="params">i</span>)</span>&#123;</div><div class="line">				<span class="keyword">var</span> sh = opts[<span class="string">"rowHeight"</span>],speed = opts[<span class="string">"speed"</span>],_this = $(<span class="keyword">this</span>);</div><div class="line">				intId[i] = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">					<span class="keyword">if</span>(_this.find(<span class="string">"ul"</span>).height()&lt;=_this.height())&#123;</div><div class="line">						clearInterval(intId[i]);</div><div class="line">					&#125;<span class="keyword">else</span>&#123;</div><div class="line">						marquee(_this, sh);</div><div class="line">					&#125;</div><div class="line">				&#125;, speed);</div><div class="line">	</div><div class="line">				_this.hover(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">					clearInterval(intId[i]);</div><div class="line">				&#125;,<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">					intId[i] = setInterval(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">						<span class="keyword">if</span>(_this.find(<span class="string">"ul"</span>).height()&lt;=_this.height())&#123;</div><div class="line">							clearInterval(intId[i]);</div><div class="line">						&#125;<span class="keyword">else</span>&#123;</div><div class="line">							marquee(_this, sh);</div><div class="line">						&#125;</div><div class="line">					&#125;, speed);</div><div class="line">				&#125;);</div><div class="line">			</div><div class="line">			&#125;);</div><div class="line">	</div><div class="line">		&#125;</div><div class="line">	</div><div class="line">	&#125;)(jQuery);</div></pre></td></tr></table></figure></p>
 
             <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/01/07/JS-Math&Str/">
+        JS中math，string对象理解 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2017/01/13/scroll-JQuery/" data-title="JQuery-rolling无缝向上滚动" data-url="https://tanelmer.github.io/2017/01/13/scroll-JQuery/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"elmer"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
-<section id="process">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">Past</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">Now</div>
-                    <div class="dot_bt"></div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2015/12/1-2016/06/07 实习 - 杭州喔影网络科技有限公司</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2016/07/061-2016/12/25 项目 - 喔图 ( 互联网 + 摄影，一家摄影服务平台 )</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">3</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2017/1/1 整装待发~~</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-                <!-- timeline-centered -->
-            </div>
-        </div>
-    </div>
-</section>
+
 
       
 <!-- ============================ Footer =========================== -->
