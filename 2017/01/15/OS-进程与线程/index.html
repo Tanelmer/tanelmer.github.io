@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Category: 生活随笔 | elmer - 尘埃落定</title>
+  <title>OS中的进程与线程 | elmer - 尘埃落定</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -195,69 +195,76 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p><b style="color:#fff;">每一个不曾起舞的日子都是对生命的辜负</b>。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/01/04/2016个人年度总结/">时光那么贵，奈何虚度</a></h4>
-                            
-                            <p><time datetime="2017-01-04T07:37:53.341Z"><a href="/2017/01/04/2016个人年度总结/">2017-01-04</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-01-15T06:54:17.694Z" itemprop="datePublished">
+          2017-01-15
+      </time>
+    
+    
+    | 
+    <a href='/tags/OS/'>OS</a>
+    
+    
+</span>
+                <h1>OS中的进程与线程</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h3 id="OS中关于进程与线程的了解"><a href="#OS中关于进程与线程的了解" class="headerlink" title="OS中关于进程与线程的了解"></a>OS中关于进程与线程的了解</h3><p>今天学习node时，有看到说node是单线程的，然后疑惑就来了，虽然大致知道什么叫单线程，多线程，可对于线程和进程这之间区别理解还是模模糊糊的，故翻出以前的课本重新复习一番，顺便记录下。<br><a id="more"></a></p>
+<blockquote>
+<h2 id="进程定义"><a href="#进程定义" class="headerlink" title="进程定义"></a>进程定义</h2><p>进程：为了程序能并发执行，并且可以对并发执行的程序加以控制和描述，OS引入“进程”概念，进程由此而来，进程其实是进程实体，进程实体由进程控制块(PCB)，程序段，相关的数据段构成。<br>进程的五种基本状态：创建、就绪、执行、阻塞、终止。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">创建-&gt;就绪: 许可</div><div class="line">阻塞-&gt;就绪: I/O完成</div><div class="line">就绪-&gt;执行: 进程调度</div><div class="line">执行--&gt;&gt;就绪: 时间片完</div><div class="line">执行-&gt;阻塞: I/O请求</div><div class="line">执行-&gt;终止: 释放</div></pre></td></tr></table></figure></p>
+</blockquote>
+<hr>
+<blockquote>
+<h2 id="线程定义"><a href="#线程定义" class="headerlink" title="线程定义"></a>线程定义</h2><p>线程: 如果说，在OS中进入进程的目的是为了使多个程序能并发执行，以提高资源利用率和系统吞吐量，那么，在OS中再引入线程，则是为了减少程序在并发执行时所付出的时空开销，使OS具有更好的并发性。<br>在20世纪60-80年代，在多道程序OS中一直是以进程作为能拥有资源和独立调度(运行)的基本单位的，直到80年代后，人们提出了比进程更小的基本单位-线程。</p>
+</blockquote>
+<hr>
+<blockquote>
+<h2 id="OS中线程与进程的比较"><a href="#OS中线程与进程的比较" class="headerlink" title="OS中线程与进程的比较"></a>OS中线程与进程的比较</h2><p>由于线程具有许多传统进程的特征，所以又称之为轻型进程，以下中调度性，并发性，系统开销和拥有资源方面对线程和进程进行比较。</p>
+<ul>
+<li>调度性、系统开销：传统OS进程是作为独立调度和分派的基本单位，每次调度时，需要切换上下问，开销较大，而引入线程的OS中，线程作为基本单位，切换时基本只需要保存和设置少量寄存器的内容，代价低于进程，系统开销低。</li>
+<li>并发性：引入线程的OS中，不仅进程之间可以并发，而且在一个进程中的多个线程之间亦可并发，甚至还允许一个进程内的所有线程都能并发，这使得OS具有更好的并发性。</li>
+<li>拥有资源：线程本身并不拥有系统资源，而进程可以拥有资源并作为系统中拥有资源的一个基本单位。</li>
+<li>独立性：在同一进程中单不同线程之间的独立性要比不同进程之间的独立性低很多。这是为了防止进程之间彼此干扰和破坏。</li>
+</ul>
+</blockquote>
+<p><strong>我的理解：如果引入了线程的OS中，一个进程中或许有多个线程，而且都能并发。</strong><br><strong>两者在不同OS下都是作为OS独立调度和分派的基本单位。</strong></p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>生命不息，奋斗不止，fighting。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/01/13/scroll-JQuery/">
+        JQuery-rolling无缝向上滚动 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2017/01/15/OS-进程与线程/" data-title="OS中的进程与线程" data-url="https://tanelmer.github.io/2017/01/15/OS-进程与线程/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"elmer"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 

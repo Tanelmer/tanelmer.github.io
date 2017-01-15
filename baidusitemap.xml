@@ -4,6 +4,46 @@
 
     
   <url>
+    <loc>https://tanelmer.github.io/2017/01/15/OS-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
+    <lastmod>2017-01-15T07:48:13.728Z</lastmod>
+    <data>
+        <display>
+        <title>OS中的进程与线程</title>
+        <pubTime>2017-01-15T06:54:17.694Z</pubTime>
+        
+        <tag>OS</tag>
+         
+         
+           
+             
+              <breadCrumb title="OS" url="https://tanelmer.github.io/categories/OS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>https://tanelmer.github.io/2017/01/03/JS-error/</loc>
+    <lastmod>2017-01-15T06:53:01.497Z</lastmod>
+    <data>
+        <display>
+        <title>JS异常处理</title>
+        <pubTime>2017-01-03T09:40:03.544Z</pubTime>
+        
+        <tag>JavaScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="https://tanelmer.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>https://tanelmer.github.io/2017/01/13/scroll-JQuery/</loc>
     <lastmod>2017-01-13T05:42:37.974Z</lastmod>
     <data>
@@ -131,26 +171,6 @@
         <display>
         <title>关于AMD&CMD - elmer</title>
         <pubTime>2016-12-29T09:26:21.856Z</pubTime>
-        
-        <tag>JavaScript</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="https://tanelmer.github.io/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>https://tanelmer.github.io/2017/01/03/JS-error/</loc>
-    <lastmod>2017-01-04T11:01:34.733Z</lastmod>
-    <data>
-        <display>
-        <title>JS异常处理</title>
-        <pubTime>2017-01-03T09:40:03.544Z</pubTime>
         
         <tag>JavaScript</tag>
          
