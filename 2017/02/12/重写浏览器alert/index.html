@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>Category: 前端工具 | elmer - 尘埃落定</title>
+  <title>title | elmer - 尘埃落定</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -84,7 +84,7 @@
 </head>
 
 <!--
-<body class="home-template">
+<body class="post-template">
 -->
 <body id="index" class="lightnav animsition">
 
@@ -195,69 +195,59 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div>
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p><b style="color:#fff;">每一个不曾起舞的日子都是对生命的辜负</b>。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
-
-
-
-
-<section id="services">
+      
+<section id="intro">
     <div class="container">
-        <div class="row">
-            <div class="col-md-10 col-md-offset-1">
-                <div class="row boxes">
-                    
-                    
-                        
-                        
-                        <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3 wow fadeInUp" data-wow-delay="0.3s">
-                            
-                              <h4 class="title"><a href="/2017/01/04/consoleZ/">consoleZ - 你值得拥有的Windows系统命令行工具</a></h4>
-                            
-                            <p><time datetime="2017-01-04T08:19:54.069Z"><a href="/2017/01/04/consoleZ/">2017-01-04</a></time></p>
-                        </div>
-                    
-                </div>
-            </div>    
+        <div class="row col-md-offset-2">
+            <div class="col-md-8">
+    			<span class="post-meta">
+      <time datetime="2017-02-12T14:11:28.458Z" itemprop="datePublished">
+          2017-02-12
+      </time>
+    
+    
+    | 
+    <a href='/tags/JavaScript/'>JavaScript</a>
+    
+    
+</span>
+                <h1>title</h1>
+            </div>
         </div>
-    </div>
-</section> 
+        <div class="col-md-8 col-md-offset-2">
+      		<h3 id="重写window-alert"><a href="#重写window-alert" class="headerlink" title="重写window.alert"></a>重写window.alert</h3><hr>
+<p>其实主要还是想多练手，毕竟熟能生巧，看得多写得多了自然会的就多了。<br>理解理解这简单的JQ插件思路，alert为例。<br><a id="more"></a><br>对于alert基本上前端汪都不会陌生了，简单的理解下封装的思路吧，虽然这个插件也非常简单，之前在职的公司在用的，大部分copy下来了。<br>看了一遍之前的代码，利用js和css就可以了，插件封装的思想跟JQ插件一致，用extend函数整合用户传入的参数对象，然后实现定制alert。<br>插件中先把弹窗dom结构写好，用append添加到body节点下，绑定按钮回调事件，根据调用参数动态的改变alert弹窗的宽高这些，非常实用。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">window</span>.alert = <span class="function"><span class="keyword">function</span>(<span class="params">options</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(<span class="keyword">typeof</span>(options) != <span class="string">'object'</span>)&#123;</div><div class="line">		options = &#123;</div><div class="line">			<span class="attr">con</span>:options</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">var</span> opts = $.extend(&#123;</div><div class="line">		<span class="attr">tit</span>:<span class="string">'标题'</span>,</div><div class="line">		<span class="attr">con</span>:<span class="string">'内容'</span>,</div><div class="line">		<span class="attr">btn</span>:[<span class="string">'确定'</span>],</div><div class="line">		<span class="attr">width</span>:<span class="number">260</span>,</div><div class="line">		<span class="attr">height</span>:<span class="number">225</span>,</div><div class="line">		<span class="attr">tClose</span>: <span class="literal">true</span>, </div><div class="line">		<span class="attr">fClose</span>: <span class="literal">true</span>, </div><div class="line">		<span class="attr">ok</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125;, </div><div class="line">		<span class="attr">no</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;&#125; </div><div class="line">	&#125;,options);</div><div class="line">	<span class="keyword">var</span> btnStr = <span class="string">''</span>,</div><div class="line">		btnCount = opts.btn.length,</div><div class="line">		btnWidth = opts.width / btnCount;</div><div class="line">	<span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; btnCount; i++) &#123;</div><div class="line">		<span class="keyword">if</span>(i == <span class="number">0</span>) &#123;</div><div class="line">			btnStr += <span class="string">'&lt;div style="display:inline-block;"&gt;&lt;button class="alert-btn trueBtn" id="alertTrue" style="width:'</span> + btnWidth + <span class="string">'px;"&gt;'</span> + opts.btn[i] + <span class="string">'&lt;/button&gt;&lt;/div &gt;'</span>;</div><div class="line">		&#125; <span class="keyword">else</span> &#123;</div><div class="line">			btnStr = <span class="string">'&lt;div style="display:inline-block;"&gt;&lt;button class="alert-btn falseBtn" id="alertFalse" style="width:'</span> + btnWidth + <span class="string">'px;"&gt;'</span> + opts.btn[i] + <span class="string">'&lt;/button&gt;&lt;/div &gt;'</span> + btnStr;</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line"> 	<span class="keyword">var</span> alertStr = <span class="string">''</span> +</div><div class="line">	<span class="string">'&lt;div class="layout alert-layout" id="alert-layout"&gt;'</span> +</div><div class="line">	<span class="string">'&lt;div class="alert" style="width:'</span> + opts.width + <span class="string">'px; height:'</span> + opts.height + <span class="string">'px;"&gt;'</span> +</div><div class="line">	<span class="string">'&lt;div class="alert-tit"&gt;'</span> + opts.tit + <span class="string">'&lt;/div&gt;'</span> +</div><div class="line">	<span class="string">'&lt;section class="alert-con" style="width:'</span> + opts.width + <span class="string">'px; height:'</span> + (opts.height<span class="number">-65</span>) + <span class="string">'px;"&gt;'</span> + opts.con + <span class="string">'&lt;/section&gt;'</span> +</div><div class="line">	<span class="string">'&lt;div class="alert-btn-group"&gt;'</span> + btnStr + <span class="string">'&lt;/div&gt;'</span> +</div><div class="line">	<span class="string">'&lt;/div&gt;'</span> +</div><div class="line">	<span class="string">'&lt;/div&gt;'</span>;</div><div class="line">	$(<span class="string">'body'</span>).append(alertStr);</div><div class="line">	$(<span class="string">'#alertTrue'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="keyword">if</span>(opts.tClose) &#123;</div><div class="line">			alertClose();</div><div class="line">		&#125;</div><div class="line">		opts.ok();</div><div class="line">	&#125;);</div><div class="line">	$(<span class="string">'#alertFalse'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		<span class="keyword">if</span>(opts.fClose) &#123;</div><div class="line">			alertClose();</div><div class="line">		&#125;</div><div class="line">		opts.no();</div><div class="line">	&#125;);</div><div class="line">	<span class="function"><span class="keyword">function</span> <span class="title">alertClose</span>(<span class="params"></span>) </span>&#123;</div><div class="line">		$(<span class="string">'#alert-layout'</span>).remove();</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line">alert(&#123;</div><div class="line">	<span class="attr">tit</span>:<span class="string">'练习封装alert'</span>,</div><div class="line">	<span class="attr">con</span>:<span class="string">'点击OK跳转至blog'</span>,</div><div class="line">	<span class="attr">btn</span>:[<span class="string">'OK'</span>,<span class="string">'NO'</span>],</div><div class="line">	<span class="attr">ok</span>:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">		location.href = <span class="string">'https://tanelmer.github.io'</span></div><div class="line">	&#125;</div><div class="line">&#125;);</div></pre></td></tr></table></figure></p>
 
-<section id="statement">
-    <div class="container text-center wow fadeInUp" data-wow-delay="0.5s">
-        <div class="row">
-            <p>生命不息，奋斗不止，fighting。</p>
+            <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
+        <nav class="pagination" role="pagination">
+    
+    
+    <a class="pull-right" href="/2017/01/28/new year/">
+        鸡年大吉 →
+    </a>
+    
+</nav>
+
+        <div class="duoshuo">
+<div class="ds-thread" data-thread-key="2017/02/12/重写浏览器alert/" data-title="title" data-url="https://tanelmer.github.io/2017/02/12/重写浏览器alert/"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"elmer"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
+</script>
+</div>
     </div>
 </section>
+
+
       
 <!-- ============================ Footer =========================== -->
 
