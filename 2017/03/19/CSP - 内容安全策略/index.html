@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>关于AMD&amp;CMD - elmer | elmer - 尘埃落定</title>
+  <title>CSP - 内容安全策略 | elmer - 尘埃落定</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -203,58 +203,151 @@
         <div class="row col-md-offset-2">
             <div class="col-md-8">
     			<span class="post-meta">
-      <time datetime="2016-12-29T09:26:21.856Z" itemprop="datePublished">
-          2016-12-29
+      <time datetime="2017-03-19T13:54:17.705Z" itemprop="datePublished">
+          2017-03-19
       </time>
     
     
     | 
-    <a href='/tags/JavaScript/'>JavaScript</a>
+    <a href='/tags/前端安全/'>前端安全</a>
     
     
 </span>
-                <h1>关于AMD&CMD - elmer</h1>
+                <h1>CSP - 内容安全策略</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-      		<h2 id="AMD-和-CMD-两种前端模块化思想学习"><a href="#AMD-和-CMD-两种前端模块化思想学习" class="headerlink" title="AMD 和 CMD 两种前端模块化思想学习"></a>AMD 和 CMD 两种前端模块化思想学习</h2><p>其实，这两个规范都是两个JS模块化框架在推广过程中被广泛认知出来的两种规范；<br><a id="more"></a><br>具体上，我们可以看这以下这些内容。</p>
-<blockquote>
-<p>（出自）<a href="http://www.cnblogs.com/dojo-lzz/p/4707725.html" target="_blank" rel="external">http://www.cnblogs.com/dojo-lzz/p/4707725.html</a></p>
+      		<h1 id="关于对XSS终结者CSP的学习"><a href="#关于对XSS终结者CSP的学习" class="headerlink" title="关于对XSS终结者CSP的学习"></a>关于对XSS终结者CSP的学习</h1><p>昨天在团队中做了关于前端安全XSS CRSF相关的分享，内容里有涉及到CSP，说实话在写ppt时，也只是粗略的看了下CSP，而没有去详细了解，今天就详细的做下记录吧<br><a id="more"></a></p>
+<h2 id="CSP概念"><a href="#CSP概念" class="headerlink" title="CSP概念"></a>CSP概念</h2><p>CSP 全称为 Content Security Policy，即内容安全策略。主要以白名单的形式配置可信任的内容来源，在网页中，能够使白名单中的内容正常执行（包含 JS，CSS，Image 等等），而非白名单的内容无法正常执行，从而减少跨站脚本攻击（XSS），当然，也能够减少运营商劫持的内容注入攻击。</p>
 <hr>
-</blockquote>
-<h3 id="RequireJS-和-SeaJS-都是很不错的模块加载器，两者区别如下："><a href="#RequireJS-和-SeaJS-都是很不错的模块加载器，两者区别如下：" class="headerlink" title="RequireJS 和 SeaJS 都是很不错的模块加载器，两者区别如下："></a>RequireJS 和 SeaJS 都是很不错的模块加载器，两者区别如下：</h3><ol>
-<li><p>两者定位有差异。RequireJS 想成为浏览器端的模块加载器，同时也想成为 Rhino / Node 等环境的模块加载器。SeaJS 则专注于 Web 浏览器端，同时通过 Node 扩展的方式可以很方便跑在 Node 服务器端</p>
-</li>
-<li><p>两者遵循的标准有差异。RequireJS 遵循的是 AMD（异步模块定义）规范，SeaJS 遵循的是 CMD （通用模块定义）规范。规范的不同，导致了两者 API 的不同。SeaJS 更简洁优雅，更贴近 CommonJS Modules/1.1 和 Node Modules 规范。</p>
-</li>
-<li><p>两者社区理念有差异。RequireJS 在尝试让第三方类库修改自身来支持 RequireJS，目前只有少数社区采纳。SeaJS 不强推，而采用自主封装的方式来“海纳百川”，目前已有较成熟的封装策略。</p>
-</li>
-<li><p>两者代码质量有差异。RequireJS 是没有明显的 bug，SeaJS 是明显没有 bug。</p>
-</li>
-<li><p>两者对调试等的支持有差异。SeaJS 通过插件，可以实现 Fiddler 中自动映射的功能，还可以实现自动 combo 等功能，非常方便便捷。RequireJS 无这方面的支持。</p>
-</li>
-<li><p>两者的插件机制有差异。RequireJS 采取的是在源码中预留接口的形式，源码中留有为插件而写的代码。SeaJS 采取的插件机制则与 Node 的方式一致：开放自身，让插件开发者可直接访问或修改，从而非常灵活，可以实现各种类型的插件。</p>
-</li>
+<h3 id="CSP发展时间轴"><a href="#CSP发展时间轴" class="headerlink" title="CSP发展时间轴"></a>CSP发展时间轴</h3><p>毋容置疑CSP是一个伟大的策略，但CSP从最初设计到被W3C认可制定成通用标准，却经历了一个漫长而曲折的过程。</p>
+<ol>
+<li>CSP模型首次被提出<br>这要从2007年说起，当时XSS攻击已经在OWASP TOP10攻击中排名第一位，CSP的最初的设想就在这一年被Mozilla项目组的Gervase Markham和WEB安全界大牛Robert Hansen ‘rsnake’两人共同提出的。</li>
+<li>浏览器首次使用CSP<br>2011年3月Firefox 4.0发布，首次把CSP当作一种正式的安全策略规范使用到浏览器中。当时火狐使用的是自己定义的X-Content-Security-Policy 头。单从CSP推广上来看，Firefox4.0的发布是划时代的，虽然此时的CSP只是Firefox自己定义的一个内部标准。但在此之后，CSP的概 念被全球迅速推广。</li>
+<li>Chrome使用CSP<br>随后在2011年9月，谷歌在Chrome浏览器14.0版本发布时加入CSP，而Chrome浏览器使用的也是自己的 CSP标准，它使用X-Webkit-CSP头进行对CSP的解析，这个头从字面上更能看出来Chrome浏览器使用的是Webkit内核。此时世界主流 的2大浏览器Chrome、Firefox都已经支持了CSP。</li>
+<li>W3C起草CSP标准<br>作为标准发布的W3C组织顺其自然在2011年11月在官网上发布了CSP1.0草案。W3C的CSP1.0草案的语法和Firefox和Chrome中截然不同，随着时间的推移1年后，W3C的CSP1.0草案已经到了推选阶段，基本可以正式发布。</li>
+<li>全面支持W3C标准的CSP<br>在2012年2月Chrome25版本发布时，宣布支持W3C标准的CSP1.0。2013年6月Firefox宣布在 23版本中全面支持W3C的CSP1.0标准。同样是在2013年6月，W3C发布CSP1.1标准，里面又加入了不少语法，现在大多浏览器还都不支持。 IE10中开始支持CSP中的’sandbox’语法，其他语法暂不支持</li>
 </ol>
+<hr>
+<h2 id="CSP类型"><a href="#CSP类型" class="headerlink" title="CSP类型"></a>CSP类型</h2><ol>
+<li>Content-Security-Policy</li>
+<li>Content-Security-Policy-Report-Only<br>这两种策略类型的主要区别也可以从命名上看出，第一种对不安全的资源会进行阻止执行，而第二种只会进行数据上报，不会有实际的阻止。<br>当定义多个策略的时候，浏览器会优先采用最先定义的。</li>
+</ol>
+<hr>
+<h2 id="CSP示例"><a href="#CSP示例" class="headerlink" title="CSP示例"></a>CSP示例</h2><p>示例：在 HTML 的 Head 中添加如下 Meta 标签，将在符合 CSP 标准的浏览器中使非同源的 不被加载执行。<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Security-Policy"</span> <span class="attr">content</span>=<span class="string">"-src 'self'"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h3 id="HTML-Meta-标签"><a href="#HTML-Meta-标签" class="headerlink" title="HTML Meta 标签"></a>HTML Meta 标签</h3><p>　　在这种形式中，Meta 标签主要含有两部分的 key-value：http-equivcontent<br>    http-equiv 的 value 为 CSP 的策略类型，而 content 则是声明指令集合，即白名单。如<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Security-Policy"</span> <span class="attr">content</span>=<span class="string">"-src 'self'"</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<p>　　在HTML 的 head 中 添加上面的 Meta 标签，那么当浏览器支持 CSP 标准时，由于使用的是 Content-Security-Policy 实际阻止的策略，所以将会使得非同源的 （根据指令集合来定）不会被加载及执行。<br>　　Meta 标签的 Content-Security-Policy-Report-Only 方式在当前（2016/5/19）多数移动端浏览器上表现正常，但是 不推荐 这样做，如 chrome 50 会产生如下的提示<br>　　The report-only Content Security Policy xxxxxxx was delivered via a element,which is disallowed. The policy has been ignored.</p>
+<h1 id="HTTP-Header"><a href="#HTTP-Header" class="headerlink" title="HTTP Header"></a>HTTP Header</h1><p>　　通过 Meta 的方式很是简单，但当涉及到的页面较多时，使用 Meta 标签的方式需要在每个页面都各自加上。而如果通过服务端配置 HTML 返回的响应头 HTTP header 带上 CSP 的指令的话，那将能够一劳永逸，同时支持多个页面。下图为响应头<br>　　不仅如此，这种形式的 Content-Security-Policy-Report-Only 方式能够得到更好的兼容支持，也是推荐方式。</p>
+<hr>
+<h2 id="CSP属性指令"><a href="#CSP属性指令" class="headerlink" title="CSP属性指令"></a>CSP属性指令</h2><table>
+<thead>
+<tr>
+<th>指令</th>
+<th style="text-align:center">取值示例</th>
+<th style="text-align:right">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>default-src</td>
+<td style="text-align:center">‘self’ cdn.example.com</td>
+<td style="text-align:right">定义针对所有类型（js/image/css/web font/ajax/iframe/多媒体等）资源的默认加载策略，某类型资源如果没有单独定义策略，就使用默认。</td>
+</tr>
+<tr>
+<td>-src</td>
+<td style="text-align:center">‘self’ js.example.com</td>
+<td style="text-align:right">定义针对Java的加载策略</td>
+</tr>
+<tr>
+<td>object-src</td>
+<td style="text-align:center">‘self’</td>
+<td style="text-align:right">针对,, 等标签的加载策略</td>
+</tr>
+<tr>
+<td>style-src</td>
+<td style="text-align:center">‘self’ css.example.com</td>
+<td style="text-align:right">定义针对样式的加载策略</td>
+</tr>
+<tr>
+<td>img-src</td>
+<td style="text-align:center">‘self’ image.example.com</td>
+<td style="text-align:right">定义针对图片的加载策略</td>
+</tr>
+<tr>
+<td>media-src</td>
+<td style="text-align:center">‘media.example.com’</td>
+<td style="text-align:right">针对或者引入的html多媒体等标签的加载策略</td>
+</tr>
+<tr>
+<td>frame-src</td>
+<td style="text-align:center">‘self’</td>
+<td style="text-align:right">针对iframe的加载策略</td>
+</tr>
+<tr>
+<td>connect-src</td>
+<td style="text-align:center">‘self’</td>
+<td style="text-align:right">针对Ajax、WebSocket等请求的加载策略。不允许的情况下，浏览器会模拟一个状态为400的响应</td>
+</tr>
+<tr>
+<td>font-src</td>
+<td style="text-align:center">font.qq.com</td>
+<td style="text-align:right">针对Web Font的加载策略</td>
+</tr>
+<tr>
+<td>sandbox</td>
+<td style="text-align:center">allow-forms allow-s</td>
+<td style="text-align:right">对请求的资源启用sandbox</td>
+</tr>
+<tr>
+<td>report-uri</td>
+<td style="text-align:center">/some-report-uri</td>
+<td style="text-align:right">告诉浏览器如果请求的资源不被策略允许时，往哪个地址提交日志信息。不阻止任何内容，可以改用Content-Security-Policy-Report-Only头</td>
+</tr>
+<tr>
+<td>base-uri</td>
+<td style="text-align:center">‘self’</td>
+<td style="text-align:right">限制当前页面的url（CSP2）</td>
+</tr>
+<tr>
+<td>child-src</td>
+<td style="text-align:center">‘self’</td>
+<td style="text-align:right">限制子窗口的源(iframe、弹窗等),取代frame-src（CSP2）</td>
+</tr>
+<tr>
+<td>form-action</td>
+<td style="text-align:center">‘self’</td>
+<td style="text-align:right">限制表单能够提交到的源（CSP2）</td>
+</tr>
+<tr>
+<td>frame-ancestors</td>
+<td style="text-align:center">‘none’</td>
+<td style="text-align:right">限制了当前页面可以被哪些页面以iframe,frame,object等方式加载（CSP2）</td>
+</tr>
+<tr>
+<td>plugin-types</td>
+<td style="text-align:center">application/pdf</td>
+<td style="text-align:right">限制插件的类型（CSP2）</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="CSP实践经验"><a href="#CSP实践经验" class="headerlink" title="CSP实践经验"></a>CSP实践经验</h3><p>　　CSP 的阻止加载及执行的方式相当强大，也因为它如此强大，所以在使用时更是要小心谨慎，毕竟，如一个不小心制定了错误的指令集合方案，那将可能导致阻止了正常文件的加载，影响业务功能，这是相当危险的。<br>　　一步步制定你的 CSP 方案<br>　　1. 通过 HTML Meta 标签进行初步方案的制定<br>　　这种方式实现成本低，只对当前的 HTML 有效，从而能够进行逐步灰度。当然也存在上面提及的兼容性问题，但如果现在是在移动端上，或者在可预期的浏览器内核上跑的话，在兼容性满足的情况下，那还是可以通过这个方式进行 Report-Only。结合自己业务的资源情况以及在 Chrome 上调试制定初步方案。<br>　　2. 使用 HTTP Header 的 Content-Security-Policy-Report-Only 方式进一步确定方案<br>　　由于上面的 Meta 标签存在一定的兼容问题，所以当我们制定了初步方案后，就可以开始使用 HTTP Header 的形式，小心驶得万年船，这里还是建议先使用 Report-Only 的方式，并指定上报的 url 来收集阻止的内容，通过上报的数据进行方案的优化，从而进一步确定具体方案。<br>　　3. HTTP Header 改用 Content-Security-Policy 策略进行实际拦截阻止<br>　　具体的 CSP 方案经过上面两轮洗礼，在分析完上报的数据，确定百无疏漏后，可将HTTP Header 改用 Content-Security-Policy 策略，从而进行实际拦截阻止。</p>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><p><a href="http://mt.sohu.com/20160620/n455409002.shtml" target="_blank" rel="external">XSS终结者-CSP理论与实践</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/Security/CSP/CSP_policy_directives" target="_blank" rel="external">CSP 策略指令</a></p>
 
             <div class="clearfix"></div>
             <hr class="nogutter">
         </div>
         <nav class="pagination" role="pagination">
     
-    <a class="pull-left" href="/2017/01/03/JS-error/" style="float: left;">
-        ← JS异常处理
-    </a>
     
-    
-    <a class="pull-right" href="/2016/12/24/hello-world/">
-        hexo - hello elmer →
+    <a class="pull-right" href="/2017/02/20/分享 - 网站绿锁怎么加/">
+        分享 - 网站绿锁怎么免费加（转） →
     </a>
     
 </nav>
 
         <div class="duoshuo">
-<div class="ds-thread" data-thread-key="2016/12/29/AmdorCmd/" data-title="关于AMD&amp;CMD - elmer" data-url="https://tanelmer.github.io/2016/12/29/AmdorCmd/"></div>
+<div class="ds-thread" data-thread-key="2017/03/19/CSP - 内容安全策略/" data-title="CSP - 内容安全策略" data-url="https://tanelmer.github.io/2017/03/19/CSP - 内容安全策略/"></div>
 <script type="text/javascript">
 var duoshuoQuery = {short_name:"elmer"};
 (function() {
