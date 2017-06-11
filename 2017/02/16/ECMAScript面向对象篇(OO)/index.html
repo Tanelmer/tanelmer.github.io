@@ -331,10 +331,25 @@ var duoshuoQuery = {short_name:"elmer"};
         nextText: "",
         directionNav: true
       });
+      var upperLimit = 1000;
+      var scrollElem = $('#totop');
+      var scrollSpeed = 1600;
+      scrollElem.hide();
+      $(window).scroll(function () {
+          var scrollTop = $(document).scrollTop();
+          if ( scrollTop > upperLimit ) {
+              $(scrollElem).stop().fadeTo(300, 1); // fade back in
+          }else{
+              $(scrollElem).stop().fadeTo(300, 0); // fade out
+          }
+      });
+      $(scrollElem).click(function(){
+          $('html, body').animate({scrollTop:0}, scrollSpeed); return false;
+      });
     });
 </script>
-      <div id="totop" style="position:fixed;bottom:50px;right:30px;cursor: pointer;">
-	<a title="返回顶部">Top</a>
+      <div id="totop" style="position:fixed;bottom:50px;right:30px;cursor: pointer;z-index: 10;border-radius: 50%;background: rgb(32, 32, 32);width: 55px;height: 55px;text-align: center;color: #fff;line-height: 55px;">
+	<a title="返回顶部" style="color:#fff;">Top</a>
 </div>
 
 </body>
