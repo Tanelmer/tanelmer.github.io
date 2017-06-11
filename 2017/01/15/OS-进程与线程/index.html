@@ -240,7 +240,7 @@
     </a>
     
     
-    <a class="pull-right" href="/2017/01/13/scroll-JQuery/ style="margin-right:10px!important;">
+    <a class="pull-right" href="/2017/01/13/scroll-JQuery/" style="margin-right:10px!important;">
         JQuery-rolling无缝向上滚动 →
     </a>
     
@@ -257,7 +257,9 @@ var cloudTieConfig = {
 };
 var yunManualLoad = true;
 Tie.loader("aHR0cHM6Ly9hcGkuZ2VudGllLjE2My5jb20vcGMvbGl2ZXNjcmlwdC5odG1s", true);
-$('#yun-tie-sdk-wrap').css('padding',0);
+setTimeOut(function(){
+	$('#yun-tie-sdk-wrap').css('padding',0);
+},2000);
 </script>
     </div>
 </section>
