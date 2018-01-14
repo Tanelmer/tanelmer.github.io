@@ -3,12 +3,33 @@
 
 
     
-    
-    
+  <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/01/14/websocket%E5%AE%9E%E8%B7%B5%E7%A0%94%E7%A9%B6/</loc>
+    <lastmod>2018-01-14T08:25:59.928Z</lastmod>
+    <data>
+        <display>
+        <title>websocket之即时通讯</title>
+        <pubTime>2018-01-14T04:23:59.118Z</pubTime>
+        
+        <tag>HTTP</tag>
+         
+        <tag>前端</tag>
+         
+        <tag>javascript</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://tanelmer.coding.me/tanelmer/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://tanelmer.coding.me/tanelmer/2017/11/04/theme/</loc>
-    <lastmod>2017-11-03T17:57:32.969Z</lastmod>
+    <lastmod>2018-01-14T04:44:26.431Z</lastmod>
     <data>
         <display>
         <title>Hexo主题TKL更换next</title>
@@ -25,6 +46,9 @@
     </data>
     </url>
 
+    
+    
+    
     
   <url>
     <loc>http://tanelmer.coding.me/tanelmer/2017/06/18/webpack-vue-cli%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</loc>

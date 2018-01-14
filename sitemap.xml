@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/01/14/websocket%E5%AE%9E%E8%B7%B5%E7%A0%94%E7%A9%B6/</loc>
+    
+    <lastmod>2018-01-14T08:25:59.928Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2017/11/04/theme/</loc>
+    
+    <lastmod>2018-01-14T04:44:26.431Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://tanelmer.coding.me/tanelmer/about.html</loc>
     
     <lastmod>2017-11-05T04:32:11.849Z</lastmod>
@@ -19,13 +33,6 @@
     <loc>http://tanelmer.coding.me/tanelmer/categories/index.html</loc>
     
     <lastmod>2017-11-05T03:03:15.273Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2017/11/04/theme/</loc>
-    
-    <lastmod>2017-11-03T17:57:32.969Z</lastmod>
     
   </url>
   
