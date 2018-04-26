@@ -100,7 +100,7 @@
 <meta property="og:url" content="http://tanelmer.coding.me/tanelmer/2018/04/24/ife学习记录 - git文档阅读（一）/index.html">
 <meta property="og:site_name" content="elmer - 尘埃落定">
 <meta property="og:description" content="git 文档还是需要读一读的">
-<meta property="og:updated_time" content="2018-04-25T14:50:24.219Z">
+<meta property="og:updated_time" content="2018-04-26T13:35:30.688Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="ife学习记录 - git文档阅读（git配置）">
 <meta name="twitter:description" content="git 文档还是需要读一读的">
@@ -407,10 +407,10 @@
       
         <h1 id="git文档阅读"><a href="#git文档阅读" class="headerlink" title="git文档阅读"></a>git文档阅读</h1><h2 id="Setup-and-Config-安装与配置"><a href="#Setup-and-Config-安装与配置" class="headerlink" title="Setup and Config - 安装与配置"></a>Setup and Config - 安装与配置</h2><p>这里主要还是学习配置项，安装没啥好说的。。<br><a id="more"></a><br>看下主要的配置项  </p>
 <ul>
-<li><h3 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h3><p>  配置的是你个人的用户名称和电子邮件地址。这两条配置很重要，每次 Git 提交时都会引用这两条信息，说明是谁提交了更新，所以会随更新内容一起被永久纳入历史记录：</p>
+<li><h3 id="用户信息"><a href="#用户信息" class="headerlink" title="用户信息"></a>用户信息</h3><p>  配置的是你个人的用户名称和电子邮件地址。这两条配置很重要，每次 git 提交时都会引用这两条信息，说明是谁提交了更新，所以会随更新内容一起被永久纳入历史记录：</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config --global user.name <span class="string">"tanelmer"</span></div><div class="line">$ git config --global user.email 244lixinyi@163.com</div></pre></td></tr></table></figure>
 </li>
-<li><h3 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h3><p>  设置默认使用的文本编辑器，Git 需要你输入一些额外消息的时候，会自动调用一个外部文本编辑器给你用。默认会使用操作系统指定的默认编辑器，一般可能会是 Vi 或者 Vim。如果你有其他偏好，比如 Emacs 的话，可以重新设置：</p>
+<li><h3 id="文本编辑器"><a href="#文本编辑器" class="headerlink" title="文本编辑器"></a>文本编辑器</h3><p>  设置默认使用的文本编辑器，git 需要你输入一些额外消息的时候，会自动调用一个外部文本编辑器给你用。默认会使用操作系统指定的默认编辑器，一般可能会是 Vi 或者 Vim。如果你有其他偏好，比如 Emacs 的话，可以重新设置：</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ git config --global core.editor emacs</div></pre></td></tr></table></figure>
 </li>
 <li><h3 id="差异解决工具"><a href="#差异解决工具" class="headerlink" title="差异解决工具"></a>差异解决工具</h3><p>  在解决合并冲突时使用哪种差异分析工具。比如要改用 vimdiff 的话：</p>
@@ -418,7 +418,7 @@
 </li>
 <li><h3 id="查看配置信息"><a href="#查看配置信息" class="headerlink" title="查看配置信息"></a>查看配置信息</h3><p>  查看已有配置信息列表 <code>$ git config –list</code>  </p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ git config --list</div><div class="line">user.name=Scott Chacon</div><div class="line">user.email=schacon@gmail.com</div><div class="line">color.status=auto</div><div class="line">color.branch=auto</div><div class="line">color.interactive=auto</div><div class="line">color.diff=auto</div><div class="line">...</div></pre></td></tr></table></figure>
-<p>  有时候会看到重复的变量名，那就说明它们来自不同的配置文件（比如 /etc/gitconfig 和 ~/.gitconfig），不过最终 Git 实际采用的是最后一个。<br>  也可以直接查阅某个环境变量的设定，只要把特定的名字跟在后面即可，像这样：</p>
+<p>  有时候会看到重复的变量名，那就说明它们来自不同的配置文件（比如 /etc/gitconfig 和 ~/.gitconfig），不过最终 git 实际采用的是最后一个。<br>  也可以直接查阅某个环境变量的设定，只要把特定的名字跟在后面即可，像这样：</p>
   <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">$ git config user.name</div><div class="line">tanelmer</div></pre></td></tr></table></figure>
 <hr>
 <h1 id="相关文章"><a href="#相关文章" class="headerlink" title="相关文章"></a>相关文章</h1><ul>
@@ -549,7 +549,7 @@
           
             <div class="site-state-item site-state-posts">
               <a href="/archives/">
-                <span class="site-state-item-count">25</span>
+                <span class="site-state-item-count">26</span>
                 <span class="site-state-item-name">日志</span>
               </a>
             </div>
@@ -574,7 +574,7 @@
             <div class="widget-wrap">
                 <div id="myCanvasContainer" class="widget tagcloud">
                     <canvas width="250" height="250" id="resCanvas" style="width=100%">
-                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript，JQuery/">JavaScript，JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端安全/">前端安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端，工具/">前端，工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客，文章/">博客，文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">3</span></li></ul>
+                        <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/">JavaScript</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript，JQuery/">JavaScript，JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/">OS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/">Vue</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/">git</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/">node</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端/">前端</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端安全/">前端安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/前端，工具/">前端，工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/博客，文章/">博客，文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/随笔/">随笔</a><span class="tag-list-count">3</span></li></ul>
                     </canvas>
                 </div>
             </div>
