@@ -4,6 +4,26 @@
 
     
   <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/05/05/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20git%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%EF%BC%88%E5%9B%9B%EF%BC%89/</loc>
+    <lastmod>2018-05-05T07:48:39.346Z</lastmod>
+    <data>
+        <display>
+        <title>ife学习记录 - git文档阅读（远程仓库）</title>
+        <pubTime>2018-05-05T07:48:39.345Z</pubTime>
+        
+        <tag>git</tag>
+         
+         
+           
+             
+              <breadCrumb title="git" url="http://tanelmer.coding.me/tanelmer/categories/git/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://tanelmer.coding.me/tanelmer/2018/05/01/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20git%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
     <lastmod>2018-05-01T04:14:27.000Z</lastmod>
     <data>
@@ -24,12 +44,12 @@
 
     
   <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/05/01/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20git%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%EF%BC%88%E5%9B%9B%EF%BC%89/</loc>
-    <lastmod>2018-05-01T04:11:56.000Z</lastmod>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/05/01/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20git%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
+    <lastmod>2018-05-01T04:08:33.000Z</lastmod>
     <data>
         <display>
-        <title>ife学习记录 - git文档阅读（git配置）</title>
-        <pubTime>2018-05-01T04:11:56.000Z</pubTime>
+        <title>ife学习记录 - git文档阅读（git分支）</title>
+        <pubTime>2018-05-01T04:08:33.000Z</pubTime>
         
         <tag>git</tag>
          
@@ -49,26 +69,6 @@
     <data>
         <display>
         <title>ife学习记录 - git文档阅读（git基础）</title>
-        <pubTime>2018-05-01T04:08:33.000Z</pubTime>
-        
-        <tag>git</tag>
-         
-         
-           
-             
-              <breadCrumb title="git" url="http://tanelmer.coding.me/tanelmer/categories/git/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/05/01/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20git%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB%EF%BC%88%E4%B8%89%EF%BC%89/</loc>
-    <lastmod>2018-05-01T04:08:33.000Z</lastmod>
-    <data>
-        <display>
-        <title>ife学习记录 - git文档阅读（git分支）</title>
         <pubTime>2018-05-01T04:08:33.000Z</pubTime>
         
         <tag>git</tag>
@@ -104,11 +104,11 @@
 
     
   <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/AmdorCmd/</loc>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/JS-error/</loc>
     <lastmod>2018-04-28T17:07:07.000Z</lastmod>
     <data>
         <display>
-        <title>关于AMD&CMD - elmer</title>
+        <title>JS异常处理</title>
         <pubTime>2018-04-28T17:07:07.000Z</pubTime>
         
         <tag>JavaScript</tag>
@@ -117,6 +117,86 @@
            
              
               <breadCrumb title="前端" url="http://tanelmer.coding.me/tanelmer/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/consoleZ/</loc>
+    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>consoleZ - 你值得拥有的Windows系统命令行工具</title>
+        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
+        
+        <tag>前端，工具</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端工具" url="http://tanelmer.coding.me/tanelmer/categories/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/github%E6%8D%A2coding/</loc>
+    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>从github到coding - blog</title>
+        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
+        
+        <tag>博客，文章</tag>
+         
+         
+           
+             
+              <breadCrumb title="hexo" url="http://tanelmer.coding.me/tanelmer/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/hello-world/</loc>
+    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>hexo - hello elmer</title>
+        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
+        
+        <tag>hexo</tag>
+         
+         
+           
+             
+              <breadCrumb title="hexo" url="http://tanelmer.coding.me/tanelmer/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/2016%E4%B8%AA%E4%BA%BA%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</loc>
+    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>时光那么贵，奈何虚度</title>
+        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
+        
+        <tag>随笔</tag>
+         
+         
+           
+             
+              <breadCrumb title="生活随笔" url="http://tanelmer.coding.me/tanelmer/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/"/>
           
         </display>
     </data>
@@ -164,139 +244,23 @@
 
     
   <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/JS-error/</loc>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/node-express%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2018-04-28T17:07:07.000Z</lastmod>
     <data>
         <display>
-        <title>JS异常处理</title>
+        <title>node-express搭建简单博客</title>
         <pubTime>2018-04-28T17:07:07.000Z</pubTime>
         
-        <tag>JavaScript</tag>
+        <tag>node</tag>
+         
+        <tag>javascript</tag>
+         
+        <tag>前端</tag>
          
          
            
              
-              <breadCrumb title="前端" url="http://tanelmer.coding.me/tanelmer/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/OS-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
-    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>OS中的进程与线程</title>
-        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
-        
-        <tag>OS</tag>
-         
-         
-           
-             
-              <breadCrumb title="OS" url="http://tanelmer.coding.me/tanelmer/categories/OS/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/consoleZ/</loc>
-    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>consoleZ - 你值得拥有的Windows系统命令行工具</title>
-        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
-        
-        <tag>前端，工具</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端工具" url="http://tanelmer.coding.me/tanelmer/categories/%E5%89%8D%E7%AB%AF%E5%B7%A5%E5%85%B7/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/es6%E5%AD%A6%E4%B9%A0%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
-    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>es6新特性初体验（一）</title>
-        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
-        
-        <tag>JavaScript</tag>
-         
-         
-           
-             
-              <breadCrumb title="前端" url="http://tanelmer.coding.me/tanelmer/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/github%E6%8D%A2coding/</loc>
-    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>从github到coding - blog</title>
-        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
-        
-        <tag>博客，文章</tag>
-         
-         
-           
-             
-              <breadCrumb title="hexo" url="http://tanelmer.coding.me/tanelmer/categories/hexo/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/2016%E4%B8%AA%E4%BA%BA%E5%B9%B4%E5%BA%A6%E6%80%BB%E7%BB%93/</loc>
-    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>时光那么贵，奈何虚度</title>
-        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
-        
-        <tag>随笔</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活随笔" url="http://tanelmer.coding.me/tanelmer/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/new%20year/</loc>
-    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>鸡年大吉</title>
-        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
-        
-        <tag>随笔</tag>
-         
-         
-           
-             
-              <breadCrumb title="生活随笔" url="http://tanelmer.coding.me/tanelmer/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/"/>
+              <breadCrumb title="node" url="http://tanelmer.coding.me/tanelmer/categories/node/"/>
           
         </display>
     </data>
@@ -324,11 +288,11 @@
 
     
   <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/tap%E7%82%B9%E9%80%8F%E5%A4%84%E7%90%86/</loc>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/es6%E5%AD%A6%E4%B9%A0%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89/</loc>
     <lastmod>2018-04-28T17:07:07.000Z</lastmod>
     <data>
         <display>
-        <title>移动前端tap事件点透解决方案</title>
+        <title>es6新特性初体验（一）</title>
         <pubTime>2018-04-28T17:07:07.000Z</pubTime>
         
         <tag>JavaScript</tag>
@@ -344,23 +308,19 @@
 
     
   <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/node-express%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/new%20year/</loc>
     <lastmod>2018-04-28T17:07:07.000Z</lastmod>
     <data>
         <display>
-        <title>node-express搭建简单博客</title>
+        <title>鸡年大吉</title>
         <pubTime>2018-04-28T17:07:07.000Z</pubTime>
         
-        <tag>node</tag>
-         
-        <tag>javascript</tag>
-         
-        <tag>前端</tag>
+        <tag>随笔</tag>
          
          
            
              
-              <breadCrumb title="node" url="http://tanelmer.coding.me/tanelmer/categories/node/"/>
+              <breadCrumb title="生活随笔" url="http://tanelmer.coding.me/tanelmer/categories/%E7%94%9F%E6%B4%BB%E9%9A%8F%E7%AC%94/"/>
           
         </display>
     </data>
@@ -381,6 +341,26 @@
            
              
               <breadCrumb title="hexo" url="http://tanelmer.coding.me/tanelmer/categories/hexo/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/tap%E7%82%B9%E9%80%8F%E5%A4%84%E7%90%86/</loc>
+    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>移动前端tap事件点透解决方案</title>
+        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
+        
+        <tag>JavaScript</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://tanelmer.coding.me/tanelmer/categories/%E5%89%8D%E7%AB%AF/"/>
           
         </display>
     </data>
@@ -468,6 +448,26 @@
 
     
   <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/OS-%E8%BF%9B%E7%A8%8B%E4%B8%8E%E7%BA%BF%E7%A8%8B/</loc>
+    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>OS中的进程与线程</title>
+        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
+        
+        <tag>OS</tag>
+         
+         
+           
+             
+              <breadCrumb title="OS" url="http://tanelmer.coding.me/tanelmer/categories/OS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/websocket%E5%AE%9E%E8%B7%B5%E7%A0%94%E7%A9%B6/</loc>
     <lastmod>2018-04-28T17:07:07.000Z</lastmod>
     <data>
@@ -480,6 +480,26 @@
         <tag>前端</tag>
          
         <tag>HTTP</tag>
+         
+         
+           
+             
+              <breadCrumb title="前端" url="http://tanelmer.coding.me/tanelmer/categories/%E5%89%8D%E7%AB%AF/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/AmdorCmd/</loc>
+    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
+    <data>
+        <display>
+        <title>关于AMD&CMD - elmer</title>
+        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
+        
+        <tag>JavaScript</tag>
          
          
            
@@ -525,26 +545,6 @@
            
              
               <breadCrumb title="前端" url="http://tanelmer.coding.me/tanelmer/categories/%E5%89%8D%E7%AB%AF/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/hello-world/</loc>
-    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
-    <data>
-        <display>
-        <title>hexo - hello elmer</title>
-        <pubTime>2018-04-28T17:07:07.000Z</pubTime>
-        
-        <tag>hexo</tag>
-         
-         
-           
-             
-              <breadCrumb title="hexo" url="http://tanelmer.coding.me/tanelmer/categories/hexo/"/>
           
         </display>
     </data>
