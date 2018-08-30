@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://tanelmer.coding.me/tanelmer/about.html</loc>
+    
+    <lastmod>2018-08-30T15:05:57.473Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/webpack-vue-cli%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/</loc>
     
     <lastmod>2018-08-30T15:00:26.557Z</lastmod>
@@ -66,13 +73,6 @@
   
   <url>
     <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/node-express%E6%90%AD%E5%BB%BA%E4%B8%80%E4%B8%AA%E7%AE%80%E5%8D%95%E5%8D%9A%E5%AE%A2/</loc>
-    
-    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/hello-world/</loc>
     
     <lastmod>2018-04-28T17:07:07.000Z</lastmod>
     
@@ -177,14 +177,7 @@
   </url>
   
   <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/github%E6%8D%A2coding/</loc>
-    
-    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/ECMAScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AF%87(OO)/</loc>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/hello-world/</loc>
     
     <lastmod>2018-04-28T17:07:07.000Z</lastmod>
     
@@ -198,7 +191,21 @@
   </url>
   
   <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/ECMAScript%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1%E7%AF%87(OO)/</loc>
+    
+    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/%E5%89%8D%E7%AB%AF%E7%BB%84%E4%BB%B6%E9%9B%86%20-%20%E8%BD%AC%E8%BD%BD/</loc>
+    
+    <lastmod>2018-04-28T17:07:07.000Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>http://tanelmer.coding.me/tanelmer/2018/04/29/github%E6%8D%A2coding/</loc>
     
     <lastmod>2018-04-28T17:07:07.000Z</lastmod>
     
