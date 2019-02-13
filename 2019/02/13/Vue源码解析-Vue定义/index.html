@@ -78,7 +78,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="JavaScript,Vue," />
 
 
 
@@ -94,18 +94,18 @@
 
 
 
-<meta name="description" content="独处与反思~">
-<meta name="keywords" content="随笔">
+<meta name="description" content="深入了解Vue框架，源码设计">
+<meta name="keywords" content="JavaScript,Vue">
 <meta property="og:type" content="article">
-<meta property="og:title" content="独处">
-<meta property="og:url" content="http://tanelmer.coding.me/tanelmer/2018/11/01/独处与反思/index.html">
+<meta property="og:title" content="Vue源码解析-Vue定义">
+<meta property="og:url" content="http://tanelmer.coding.me/tanelmer/2019/02/13/Vue源码解析-Vue定义/index.html">
 <meta property="og:site_name" content="elmer - 尘埃落定">
-<meta property="og:description" content="独处与反思~">
+<meta property="og:description" content="深入了解Vue框架，源码设计">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-11-01T16:50:59.403Z">
+<meta property="og:updated_time" content="2019-02-13T16:36:43.442Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="独处">
-<meta name="twitter:description" content="独处与反思~">
+<meta name="twitter:title" content="Vue源码解析-Vue定义">
+<meta name="twitter:description" content="深入了解Vue框架，源码设计">
 
 
 
@@ -134,13 +134,13 @@
 
 
 
-  <link rel="canonical" href="http://tanelmer.coding.me/tanelmer/2018/11/01/独处与反思/"/>
+  <link rel="canonical" href="http://tanelmer.coding.me/tanelmer/2019/02/13/Vue源码解析-Vue定义/"/>
 
 
 
 
 
-  <title>独处 | elmer - 尘埃落定</title>
+  <title>Vue源码解析-Vue定义 | elmer - 尘埃落定</title>
   
 
 
@@ -283,7 +283,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://tanelmer.coding.me/tanelmer/2018/11/01/独处与反思/">
+    <link itemprop="mainEntityOfPage" href="http://tanelmer.coding.me/tanelmer/2019/02/13/Vue源码解析-Vue定义/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="elmer li">
@@ -300,7 +300,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">独处</h1>
+          <h1 class="post-title" itemprop="name headline">Vue源码解析-Vue定义</h1>
         
 
         <div class="post-meta">
@@ -312,8 +312,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-11-01T23:02:20+08:00">
-                2018-11-01
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-02-13T23:51:43+08:00">
+                2019-02-13
               </time>
             
 
@@ -335,8 +335,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">生活随笔</span>
+                  <a href="/categories/前端/" itemprop="url" rel="index">
+                    <span itemprop="name">前端</span>
                   </a>
                 </span>
 
@@ -378,7 +378,7 @@
 
           
               <div class="post-description">
-                  独处与反思~
+                  深入了解Vue框架，源码设计
               </div>
           
 
@@ -395,24 +395,10 @@
       
 
       
-        <h3 id="思索"><a href="#思索" class="headerlink" title="思索"></a>思索</h3><p>你想要变成什么样的人？<br><a id="more"></a></p>
-<h3 id="理想"><a href="#理想" class="headerlink" title="理想"></a>理想</h3><ul>
-<li>踏实</li>
-<li>上进</li>
-<li>有目标</li>
-<li>有计划</li>
-</ul>
-<hr>
-<h3 id="现实"><a href="#现实" class="headerlink" title="现实"></a>现实</h3><ul>
-<li>浮躁</li>
-<li>懒惰</li>
-<li>安于现状</li>
-<li>不思进取</li>
-</ul>
-<hr>
-<h3 id="身心疲惫"><a href="#身心疲惫" class="headerlink" title="身心疲惫"></a>身心疲惫</h3><p>生活本不应该是这样，没有认清自己？<br>到底怎么了？有没有正视过自己的内心啊。<br>加班成常态，晚上熬夜也成习惯，身体还能扛多久啊。<br>内心煎熬，穷？感情？犹豫不决？</p>
-<hr>
-<h3 id="改变"><a href="#改变" class="headerlink" title="改变"></a>改变</h3><p>要去除一些杂乱的感情、放弃一些无意义的事情、不消沉<br>要正视自我、追求自我内心、不迷茫<br>要果敢、坚定、不优柔寡断<br>要努力、踏实、不懒散<br>我觉得这一年过的很一般，甚至有点难受。<br>我要改变。</p>
+        <h2 id="Vue框架中Vue的定义"><a href="#Vue框架中Vue的定义" class="headerlink" title="Vue框架中Vue的定义"></a>Vue框架中Vue的定义</h2><p>平常开发spa时，一般都能看到new Vue()这样的代码，然后就会思考，Vue这个框架到底是如何去定义Vue的？Vue到底是个什么东西？然后就去翻源码了。。。<br><a id="more"></a><br>其实在<code>src/core/index.js</code>中你就可以看到Vue基本的实现了。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Vue <span class="keyword">from</span> <span class="string">'./instance/index'</span></span><br><span class="line"><span class="keyword">import</span> &#123; initGlobalAPI &#125; <span class="keyword">from</span> <span class="string">'./global-api/index'</span></span><br><span class="line"><span class="keyword">import</span> &#123; isServerRendering &#125; <span class="keyword">from</span> <span class="string">'core/util/env'</span></span><br><span class="line"><span class="keyword">import</span> &#123; FunctionalRenderContext &#125; <span class="keyword">from</span> <span class="string">'core/vdom/create-functional-component'</span></span><br><span class="line"></span><br><span class="line">initGlobalAPI(Vue)</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$isServer'</span>, &#123;</span><br><span class="line">  get: isServerRendering</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Vue.prototype, <span class="string">'$ssrContext'</span>, &#123;</span><br><span class="line">  get () &#123;</span><br><span class="line">    <span class="comment">/* istanbul ignore next */</span></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.$vnode &amp;&amp; <span class="keyword">this</span>.$vnode.ssrContext</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// expose FunctionalRenderContext for ssr runtime helper installation</span></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(Vue, <span class="string">'FunctionalRenderContext'</span>, &#123;</span><br><span class="line">  value: FunctionalRenderContext</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">Vue.version = <span class="string">'__VERSION__'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Vue</span><br></pre></td></tr></table></figure></p>
+<p>这里第一二行就是定义Vue关键代码了，然后我们继续找到对应的js文件。<br>首先是./instance/index.js<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; initMixin &#125; <span class="keyword">from</span> <span class="string">'./init'</span></span><br><span class="line"><span class="keyword">import</span> &#123; stateMixin &#125; <span class="keyword">from</span> <span class="string">'./state'</span></span><br><span class="line"><span class="keyword">import</span> &#123; renderMixin &#125; <span class="keyword">from</span> <span class="string">'./render'</span></span><br><span class="line"><span class="keyword">import</span> &#123; eventsMixin &#125; <span class="keyword">from</span> <span class="string">'./events'</span></span><br><span class="line"><span class="keyword">import</span> &#123; lifecycleMixin &#125; <span class="keyword">from</span> <span class="string">'./lifecycle'</span></span><br><span class="line"><span class="keyword">import</span> &#123; warn &#125; <span class="keyword">from</span> <span class="string">'../util/index'</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Vue</span> (<span class="params">options</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span> &amp;&amp;</span><br><span class="line">    !(<span class="keyword">this</span> <span class="keyword">instanceof</span> Vue)</span><br><span class="line">  ) &#123;</span><br><span class="line">    warn(<span class="string">'Vue is a constructor and should be called with the `new` keyword'</span>)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">this</span>._init(options)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">initMixin(Vue)</span><br><span class="line">stateMixin(Vue)</span><br><span class="line">eventsMixin(Vue)</span><br><span class="line">lifecycleMixin(Vue)</span><br><span class="line">renderMixin(Vue)</span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> Vue</span><br></pre></td></tr></table></figure></p>
+<p>这不就是一个构造函数嘛？本质上就是一个Function实现的类，然后对这个类的原型上增加方法或属性，这个地方看起来还是能看懂的。<br>看完index之后在看看那个initGlobalAPI做了什么，是在./global-api/index这里。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> config <span class="keyword">from</span> <span class="string">'../config'</span></span><br><span class="line"><span class="keyword">import</span> &#123; initUse &#125; <span class="keyword">from</span> <span class="string">'./use'</span></span><br><span class="line"><span class="keyword">import</span> &#123; initMixin &#125; <span class="keyword">from</span> <span class="string">'./mixin'</span></span><br><span class="line"><span class="keyword">import</span> &#123; initExtend &#125; <span class="keyword">from</span> <span class="string">'./extend'</span></span><br><span class="line"><span class="keyword">import</span> &#123; initAssetRegisters &#125; <span class="keyword">from</span> <span class="string">'./assets'</span></span><br><span class="line"><span class="keyword">import</span> &#123; set, del &#125; <span class="keyword">from</span> <span class="string">'../observer/index'</span></span><br><span class="line"><span class="keyword">import</span> &#123; ASSET_TYPES &#125; <span class="keyword">from</span> <span class="string">'shared/constants'</span></span><br><span class="line"><span class="keyword">import</span> builtInComponents <span class="keyword">from</span> <span class="string">'../components/index'</span></span><br><span class="line"><span class="keyword">import</span> &#123; observe &#125; <span class="keyword">from</span> <span class="string">'core/observer/index'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> &#123;</span><br><span class="line">  warn,</span><br><span class="line">  extend,</span><br><span class="line">  nextTick,</span><br><span class="line">  mergeOptions,</span><br><span class="line">  defineReactive</span><br><span class="line">&#125; <span class="keyword">from</span> <span class="string">'../util/index'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">export</span> <span class="function"><span class="keyword">function</span> <span class="title">initGlobalAPI</span> (<span class="params">Vue: GlobalAPI</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// config</span></span><br><span class="line">  <span class="keyword">const</span> configDef = &#123;&#125;</span><br><span class="line">  configDef.get = <span class="function"><span class="params">()</span> =&gt;</span> config</span><br><span class="line">  <span class="keyword">if</span> (process.env.NODE_ENV !== <span class="string">'production'</span>) &#123;</span><br><span class="line">    configDef.set = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span><br><span class="line">      warn(</span><br><span class="line">        <span class="string">'Do not replace the Vue.config object, set individual fields instead.'</span></span><br><span class="line">      )</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="built_in">Object</span>.defineProperty(Vue, <span class="string">'config'</span>, configDef)</span><br><span class="line"></span><br><span class="line">  <span class="comment">// exposed util methods.</span></span><br><span class="line">  <span class="comment">// <span class="doctag">NOTE:</span> these are not considered part of the public API - avoid relying on</span></span><br><span class="line">  <span class="comment">// them unless you are aware of the risk.</span></span><br><span class="line">  Vue.util = &#123;</span><br><span class="line">    warn,</span><br><span class="line">    extend,</span><br><span class="line">    mergeOptions,</span><br><span class="line">    defineReactive</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Vue.set = set</span><br><span class="line">  Vue.delete = del</span><br><span class="line">  Vue.nextTick = nextTick</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2.6 explicit observable API</span></span><br><span class="line">  Vue.observable = &lt;T&gt;(obj: T): T =&gt; &#123;</span><br><span class="line">    observe(obj)</span><br><span class="line">    return obj</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  Vue.options = Object.create(null)</span><br><span class="line">  ASSET_TYPES.forEach(type =&gt; &#123;</span><br><span class="line">    Vue.options[type + 's'] = Object.create(null)</span><br><span class="line">  &#125;)</span><br><span class="line"></span><br><span class="line">  // this is used to identify the "base" constructor to extend all plain-object</span><br><span class="line">  // components with in Weex's multi-instance scenarios.</span><br><span class="line">  Vue.options._base = Vue</span><br><span class="line"></span><br><span class="line">  extend(Vue.options.components, builtInComponents)</span><br><span class="line"></span><br><span class="line">  initUse(Vue)</span><br><span class="line">  initMixin(Vue)</span><br><span class="line">  initExtend(Vue)</span><br><span class="line">  initAssetRegisters(Vue)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里就是给Vue增加一些全局方法了，文档上的API应该都能在这里面找到。<br>看到这大概能知道Vue本质上就是Function实现的Class，然后在原型上扩展一些方法属性，然后基本上Vue就是这么定义的，当然里面还有很多很多具体的实现，在instance和global-api目录下还有很多模块，这个就留到后面慢慢琢磨吧。。</p>
 
       
     </div>
@@ -430,7 +416,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag"># 随笔</a>
+            <a href="/tags/JavaScript/" rel="tag"># JavaScript</a>
+          
+            <a href="/tags/Vue/" rel="tag"># Vue</a>
           
         </div>
       
@@ -443,8 +431,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/06/17/ife学习记录 - 构建工具（二）/" rel="next" title="ife学习记录 - 构建工具（二）">
-                <i class="fa fa-chevron-left"></i> ife学习记录 - 构建工具（二）
+              <a href="/2019/02/06/Vue源码解析-Flow&目录设计/" rel="next" title="Vue源码解析-Flow&目录设计">
+                <i class="fa fa-chevron-left"></i> Vue源码解析-Flow&目录设计
               </a>
             
           </div>
@@ -452,10 +440,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/06/Vue源码解析-Flow&目录设计/" rel="prev" title="Vue源码解析-Flow&目录设计">
-                Vue源码解析-Flow&目录设计 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -647,7 +631,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#思索"><span class="nav-number">1.</span> <span class="nav-text">思索</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理想"><span class="nav-number">2.</span> <span class="nav-text">理想</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#现实"><span class="nav-number">3.</span> <span class="nav-text">现实</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#身心疲惫"><span class="nav-number">4.</span> <span class="nav-text">身心疲惫</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#改变"><span class="nav-number">5.</span> <span class="nav-text">改变</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Vue框架中Vue的定义"><span class="nav-number">1.</span> <span class="nav-text">Vue框架中Vue的定义</span></a></li></ol></div>
             
 
           </div>
