@@ -2,6 +2,7 @@
 title: ife学习记录 - git文档阅读（git基础）
 categories: git
 tags: [git]
+date: 2018年05月01日12:08:06
 description: git 文档还是需要读一读的
 ---
 # git文档阅读

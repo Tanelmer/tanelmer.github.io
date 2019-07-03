@@ -8,7 +8,7 @@ subtitle: 爱学习，爱生活
 description: 生活不止眼前的苟且，要看向远方
 author: elmer li
 language: zh-Hans
-timezone: Asia/Beijing
+timezone: Asia/Shanghai
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
@@ -70,8 +70,8 @@ theme: next
 deploy:
   type: git
   repo:
-    # coding: git@git.coding.net:tanelmer/tanelmer.git
-    github: git@github.com:Tanelmer/tanelmer.github.io.git
+    coding: git@git.coding.net:tanelmer/tanelmer.git
+    #github: git@github.com:Tanelmer/tanelmer.github.io.git
   branch: master
   
 # Extensions
