@@ -103,7 +103,7 @@
 <meta property="og:description" content="设计模式-观察者与发布订阅模式">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/278931/1572315933773-3f840594-a2dd-4067-8956-71ae8545f18c.png#align=left&display=inline&height=372&name=%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85.png&originHeight=372&originWidth=554&size=107432&status=done&width=554">
-<meta property="og:updated_time" content="2020-03-22T05:12:57.303Z">
+<meta property="og:updated_time" content="2020-03-22T05:36:50.514Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式-观察者与发布订阅模式">
 <meta name="twitter:description" content="设计模式-观察者与发布订阅模式">
@@ -403,6 +403,7 @@
 <h3 id="发布-订阅模式"><a href="#发布-订阅模式" class="headerlink" title="发布-订阅模式"></a>发布-订阅模式</h3><p>观察者模式有一个别名叫“发布-订阅模式”，或者说是“订阅-发布模式”，订阅者和订阅目标是联系在一起的，当订阅目标发生改变时，逐个通知订阅者。我们可以用报纸期刊的订阅来形象的说明，当你订阅了一份报纸，每天都会有一份最新的报纸送到你手上，有多少人订阅报纸，报社就会发多少份报纸，报社和订报纸的客户就是上面文章开头所说的“一对多”的依赖关系。</p>
 <p>在现在的发布订阅模式中，称为发布者的消息发送者不会将消息直接发送给订阅者，这意味着发布者和订阅者不知道彼此的存在。在发布者和订阅者之间存在第三个组件，称为消息代理或调度中心或中间件，它维持着发布者和订阅者之间的联系，过滤所有发布者传入的消息并相应地分发它们给订阅者。</p>
 <p>举一个例子，你在微博上关注了A，同时其他很多人也关注了A，那么当A发布动态的时候，微博就会为你们推送这条动态。A就是发布者，你是订阅者，微博就是调度中心，你和A是没有直接的消息往来的，全是通过微博来协调的（你的关注，A的发布动态）。</p>
+<a id="more"></a>
 <p><a name="VBliz"></a></p>
 <h3 id="二者之间的区别"><a href="#二者之间的区别" class="headerlink" title="二者之间的区别"></a>二者之间的区别</h3><p><img src="https://cdn.nlark.com/yuque/0/2019/png/278931/1572315933773-3f840594-a2dd-4067-8956-71ae8545f18c.png#align=left&amp;display=inline&amp;height=372&amp;name=%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F-%E8%A7%82%E5%AF%9F%E8%80%85.png&amp;originHeight=372&amp;originWidth=554&amp;size=107432&amp;status=done&amp;width=554" alt="设计模式-观察者.png"></p>
 <p><strong>观察者模式：</strong>观察者（Observer）直接订阅（Subscribe）主题（Subject），而当主题被激活的时候，会触发（Fire Event）观察者里的事件。</p>
