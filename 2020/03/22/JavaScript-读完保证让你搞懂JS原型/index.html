@@ -102,13 +102,13 @@
 <meta property="og:site_name" content="elmer - 尘埃落定">
 <meta property="og:description" content="JavaScript-读完保证让你搞懂JS原型">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/278931/1575947833524-5d1e83cd-d576-4832-ab76-3254187fb773.png#align=left&display=inline&height=760&name=image.png&originHeight=1519&originWidth=1221&size=585486&status=done&style=none&width=610.5">
-<meta property="og:image" content="https://cdn.nlark.com/yuque/0/2019/png/278931/1575950431560-e1d94849-1a3d-4a6b-8063-78fba102f89b.png#align=left&display=inline&height=324&name=image.png&originHeight=648&originWidth=888&size=345224&status=done&style=none&width=444">
-<meta property="og:updated_time" content="2020-03-22T05:15:22.280Z">
+<meta property="og:image" content="https://picture-1256757196.cos.ap-chengdu.myqcloud.com/%E5%8E%9F%E5%9E%8B%E9%93%BE.png">
+<meta property="og:image" content="https://picture-1256757196.cos.ap-chengdu.myqcloud.com/%E5%8E%9F%E5%9E%8B%E5%AE%9E%E8%B7%B5%E7%BB%93%E6%9E%9C.png">
+<meta property="og:updated_time" content="2020-03-22T06:27:19.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读完保证让你搞懂JS原型">
 <meta name="twitter:description" content="JavaScript-读完保证让你搞懂JS原型">
-<meta name="twitter:image" content="https://cdn.nlark.com/yuque/0/2019/png/278931/1575947833524-5d1e83cd-d576-4832-ab76-3254187fb773.png#align=left&display=inline&height=760&name=image.png&originHeight=1519&originWidth=1221&size=585486&status=done&style=none&width=610.5">
+<meta name="twitter:image" content="https://picture-1256757196.cos.ap-chengdu.myqcloud.com/%E5%8E%9F%E5%9E%8B%E9%93%BE.png">
 
 
 
@@ -423,11 +423,11 @@
 <p>-<a href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object_prototypes" target="_blank" rel="noopener">MDN</a></p>
 </blockquote>
 <p><a name="YC1Zr"></a></p>
-<h3 id="看懂一张图"><a href="#看懂一张图" class="headerlink" title="看懂一张图"></a>看懂一张图</h3><p><img src="https://cdn.nlark.com/yuque/0/2019/png/278931/1575947833524-5d1e83cd-d576-4832-ab76-3254187fb773.png#align=left&amp;display=inline&amp;height=760&amp;name=image.png&amp;originHeight=1519&amp;originWidth=1221&amp;size=585486&amp;status=done&amp;style=none&amp;width=610.5" alt="image.png"></p>
+<h3 id="看懂一张图"><a href="#看懂一张图" class="headerlink" title="看懂一张图"></a>看懂一张图</h3><p><img src="https://picture-1256757196.cos.ap-chengdu.myqcloud.com/%E5%8E%9F%E5%9E%8B%E9%93%BE.png" alt="image.png"></p>
 <p>有了上面一些概念的解释，结合着这一张图，有些基础的童鞋都已经明白的差不多了。但其实还是比较抽象，我们继续用代码实践下。</p>
 <p><a name="vuieD"></a></p>
 <h3 id="解题"><a href="#解题" class="headerlink" title="解题"></a>解题</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 问：__proto__是什么？prototype又是什么？它两的区别？</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 定义一个构造函数</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Car</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">this</span>.type = <span class="string">'suv'</span>;</span><br><span class="line">  <span class="keyword">this</span>.brand = <span class="string">'BMW'</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 通过构造函数原型添加方法</span></span><br><span class="line">Car.prototype.drive = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'开始开车了，滴滴滴'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建一个实例对象</span></span><br><span class="line"><span class="keyword">let</span> myCar = <span class="keyword">new</span> Car();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 让我们看下这里面的大千世界</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'实例'</span>, myCar);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'实例原型属性'</span>, myCar.__proto__);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="string">'构造函数原型'</span>, Car.prototype);</span><br><span class="line"><span class="built_in">console</span>.log(myCar.__proto__ === Car.prototype); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
-<p><img src="https://cdn.nlark.com/yuque/0/2019/png/278931/1575950431560-e1d94849-1a3d-4a6b-8063-78fba102f89b.png#align=left&amp;display=inline&amp;height=324&amp;name=image.png&amp;originHeight=648&amp;originWidth=888&amp;size=345224&amp;status=done&amp;style=none&amp;width=444" alt="image.png"></p>
+<p><img src="https://picture-1256757196.cos.ap-chengdu.myqcloud.com/%E5%8E%9F%E5%9E%8B%E5%AE%9E%E8%B7%B5%E7%BB%93%E6%9E%9C.png" alt="image.png"></p>
 <p><a name="e5lIZ"></a></p>
 <h3 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h3><p><a href="https://bonsaiden.github.io/JavaScript-Garden/zh/#object.prototype" target="_blank" rel="noopener">原型</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Learn/JavaScript/Objects/Object_prototypes" target="_blank" rel="noopener">对象原型 - MDN</a></p>
 
