@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tanelmer.coding.me","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="XSS终结者 - CSP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSP - 内容安全策略">
+<meta property="og:url" content="http://tanelmer.coding.me/tanelmer/2017/04/16/CSP%20-%20%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5/index.html">
+<meta property="og:site_name" content="elmer - 尘埃落定">
+<meta property="og:description" content="XSS终结者 - CSP">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2017-04-15T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-02T11:19:13.000Z">
+<meta property="article:author" content="elmer li">
+<meta property="article:tag" content="前端安全">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://tanelmer.coding.me/tanelmer/2017/04/16/CSP%20-%20%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>CSP - 内容安全策略 | elmer - 尘埃落定</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb688712cefd32171d64e51724471c15";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">elmer - 尘埃落定</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱学习，爱生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tanelmer.coding.me/tanelmer/2017/04/16/CSP%20-%20%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-1256757196.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+      <meta itemprop="name" content="elmer li">
+      <meta itemprop="description" content="生活不止眼前的苟且，要看向远方">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="elmer - 尘埃落定">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CSP - 内容安全策略
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2017-04-16 00:00:00" itemprop="dateCreated datePublished" datetime="2017-04-16T00:00:00+08:00">2017-04-16</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-02 19:19:13" itemprop="dateModified" datetime="2022-04-02T19:19:13+08:00">2022-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2017/04/16/CSP%20-%20%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2017/04/16/CSP%20-%20%E5%86%85%E5%AE%B9%E5%AE%89%E5%85%A8%E7%AD%96%E7%95%A5/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>3.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>3 分钟</span>
+            </span>
+            <div class="post-description">XSS终结者 - CSP</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="关于对XSS终结者CSP的学习"><a href="#关于对XSS终结者CSP的学习" class="headerlink" title="关于对XSS终结者CSP的学习"></a>关于对XSS终结者CSP的学习</h2><p>昨天在团队中做了关于前端安全XSS CRSF相关的分享，内容里有涉及到CSP，说实话在写ppt时，也只是粗略的看了下CSP，而没有去详细了解，今天就详细的做下记录吧</p>
+<span id="more"></span>
+
+<h2 id="CSP概念"><a href="#CSP概念" class="headerlink" title="CSP概念"></a>CSP概念</h2><p>CSP 全称为 Content Security Policy，即内容安全策略。主要以白名单的形式配置可信任的内容来源，在网页中，能够使白名单中的内容正常执行（包含 JS，CSS，Image 等等），而非白名单的内容无法正常执行，从而减少跨站脚本攻击（XSS），当然，也能够减少运营商劫持的内容注入攻击。</p>
+<hr>
+<h3 id="CSP发展时间轴"><a href="#CSP发展时间轴" class="headerlink" title="CSP发展时间轴"></a>CSP发展时间轴</h3><p>毋容置疑CSP是一个伟大的策略，但CSP从最初设计到被W3C认可制定成通用标准，却经历了一个漫长而曲折的过程。</p>
+<ol>
+<li>CSP模型首次被提出<br>这要从2007年说起，当时XSS攻击已经在OWASP TOP10攻击中排名第一位，CSP的最初的设想就在这一年被Mozilla项目组的Gervase Markham和WEB安全界大牛Robert Hansen ‘rsnake’两人共同提出的。</li>
+<li>浏览器首次使用CSP<br>2011年3月Firefox 4.0发布，首次把CSP当作一种正式的安全策略规范使用到浏览器中。当时火狐使用的是自己定义的X-Content-Security-Policy 头。单从CSP推广上来看，Firefox4.0的发布是划时代的，虽然此时的CSP只是Firefox自己定义的一个内部标准。但在此之后，CSP的概 念被全球迅速推广。</li>
+<li>Chrome使用CSP<br>随后在2011年9月，谷歌在Chrome浏览器14.0版本发布时加入CSP，而Chrome浏览器使用的也是自己的 CSP标准，它使用X-Webkit-CSP头进行对CSP的解析，这个头从字面上更能看出来Chrome浏览器使用的是Webkit内核。此时世界主流 的2大浏览器Chrome、Firefox都已经支持了CSP。</li>
+<li>W3C起草CSP标准<br>作为标准发布的W3C组织顺其自然在2011年11月在官网上发布了CSP1.0草案。W3C的CSP1.0草案的语法和Firefox和Chrome中截然不同，随着时间的推移1年后，W3C的CSP1.0草案已经到了推选阶段，基本可以正式发布。</li>
+<li>全面支持W3C标准的CSP<br>在2012年2月Chrome25版本发布时，宣布支持W3C标准的CSP1.0。2013年6月Firefox宣布在 23版本中全面支持W3C的CSP1.0标准。同样是在2013年6月，W3C发布CSP1.1标准，里面又加入了不少语法，现在大多浏览器还都不支持。 IE10中开始支持CSP中的’sandbox’语法，其他语法暂不支持</li>
+</ol>
+<hr>
+<h2 id="CSP类型"><a href="#CSP类型" class="headerlink" title="CSP类型"></a>CSP类型</h2><ol>
+<li>Content-Security-Policy</li>
+<li>Content-Security-Policy-Report-Only<br>这两种策略类型的主要区别也可以从命名上看出，第一种对不安全的资源会进行阻止执行，而第二种只会进行数据上报，不会有实际的阻止。<br>当定义多个策略的时候，浏览器会优先采用最先定义的。</li>
+</ol>
+<hr>
+<h2 id="CSP示例"><a href="#CSP示例" class="headerlink" title="CSP示例"></a>CSP示例</h2><p>示例：在 HTML 的 Head 中添加如下 Meta 标签，将在符合 CSP 标准的浏览器中使非同源的 不被加载执行。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attr">content</span>=<span class="string">&quot;-src &#x27;self&#x27;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="HTML-Meta-标签"><a href="#HTML-Meta-标签" class="headerlink" title="HTML Meta 标签"></a>HTML Meta 标签</h3><p>　　在这种形式中，Meta 标签主要含有两部分的 key-value：http-equivcontent<br>    http-equiv 的 value 为 CSP 的策略类型，而 content 则是声明指令集合，即白名单。如</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">&quot;Content-Security-Policy&quot;</span> <span class="attr">content</span>=<span class="string">&quot;-src &#x27;self&#x27;&quot;</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>　　在HTML 的 head 中 添加上面的 Meta 标签，那么当浏览器支持 CSP 标准时，由于使用的是 Content-Security-Policy 实际阻止的策略，所以将会使得非同源的 （根据指令集合来定）不会被加载及执行。<br>　　Meta 标签的 Content-Security-Policy-Report-Only 方式在当前（2016&#x2F;5&#x2F;19）多数移动端浏览器上表现正常，但是 不推荐 这样做，如 chrome 50 会产生如下的提示<br>　　The report-only Content Security Policy xxxxxxx was delivered via a element,which is disallowed. The policy has been ignored.</p>
+<h1 id="HTTP-Header"><a href="#HTTP-Header" class="headerlink" title="HTTP Header"></a>HTTP Header</h1><p>　　通过 Meta 的方式很是简单，但当涉及到的页面较多时，使用 Meta 标签的方式需要在每个页面都各自加上。而如果通过服务端配置 HTML 返回的响应头 HTTP header 带上 CSP 的指令的话，那将能够一劳永逸，同时支持多个页面。下图为响应头<br>　　不仅如此，这种形式的 Content-Security-Policy-Report-Only 方式能够得到更好的兼容支持，也是推荐方式。</p>
+<hr>
+<h2 id="CSP属性指令"><a href="#CSP属性指令" class="headerlink" title="CSP属性指令"></a>CSP属性指令</h2><table>
+<thead>
+<tr>
+<th>指令</th>
+<th align="center">取值示例</th>
+<th align="right">说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>default-src</td>
+<td align="center">‘self’ cdn.example.com</td>
+<td align="right">定义针对所有类型（js&#x2F;image&#x2F;css&#x2F;web font&#x2F;ajax&#x2F;iframe&#x2F;多媒体等）资源的默认加载策略，某类型资源如果没有单独定义策略，就使用默认。</td>
+</tr>
+<tr>
+<td>-src</td>
+<td align="center">‘self’ js.example.com</td>
+<td align="right">定义针对Java的加载策略</td>
+</tr>
+<tr>
+<td>object-src</td>
+<td align="center">‘self’</td>
+<td align="right">针对,, 等标签的加载策略</td>
+</tr>
+<tr>
+<td>style-src</td>
+<td align="center">‘self’ css.example.com</td>
+<td align="right">定义针对样式的加载策略</td>
+</tr>
+<tr>
+<td>img-src</td>
+<td align="center">‘self’ image.example.com</td>
+<td align="right">定义针对图片的加载策略</td>
+</tr>
+<tr>
+<td>media-src</td>
+<td align="center">‘media.example.com’</td>
+<td align="right">针对或者引入的html多媒体等标签的加载策略</td>
+</tr>
+<tr>
+<td>frame-src</td>
+<td align="center">‘self’</td>
+<td align="right">针对iframe的加载策略</td>
+</tr>
+<tr>
+<td>connect-src</td>
+<td align="center">‘self’</td>
+<td align="right">针对Ajax、WebSocket等请求的加载策略。不允许的情况下，浏览器会模拟一个状态为400的响应</td>
+</tr>
+<tr>
+<td>font-src</td>
+<td align="center">font.qq.com</td>
+<td align="right">针对Web Font的加载策略</td>
+</tr>
+<tr>
+<td>sandbox</td>
+<td align="center">allow-forms allow-s</td>
+<td align="right">对请求的资源启用sandbox</td>
+</tr>
+<tr>
+<td>report-uri</td>
+<td align="center">&#x2F;some-report-uri</td>
+<td align="right">告诉浏览器如果请求的资源不被策略允许时，往哪个地址提交日志信息。不阻止任何内容，可以改用Content-Security-Policy-Report-Only头</td>
+</tr>
+<tr>
+<td>base-uri</td>
+<td align="center">‘self’</td>
+<td align="right">限制当前页面的url（CSP2）</td>
+</tr>
+<tr>
+<td>child-src</td>
+<td align="center">‘self’</td>
+<td align="right">限制子窗口的源(iframe、弹窗等),取代frame-src（CSP2）</td>
+</tr>
+<tr>
+<td>form-action</td>
+<td align="center">‘self’</td>
+<td align="right">限制表单能够提交到的源（CSP2）</td>
+</tr>
+<tr>
+<td>frame-ancestors</td>
+<td align="center">‘none’</td>
+<td align="right">限制了当前页面可以被哪些页面以iframe,frame,object等方式加载（CSP2）</td>
+</tr>
+<tr>
+<td>plugin-types</td>
+<td align="center">application&#x2F;pdf</td>
+<td align="right">限制插件的类型（CSP2）</td>
+</tr>
+</tbody></table>
+<hr>
+<h3 id="CSP实践经验"><a href="#CSP实践经验" class="headerlink" title="CSP实践经验"></a>CSP实践经验</h3><p>　　CSP 的阻止加载及执行的方式相当强大，也因为它如此强大，所以在使用时更是要小心谨慎，毕竟，如一个不小心制定了错误的指令集合方案，那将可能导致阻止了正常文件的加载，影响业务功能，这是相当危险的。<br>　　一步步制定你的 CSP 方案<br>　　1. 通过 HTML Meta 标签进行初步方案的制定<br>　　这种方式实现成本低，只对当前的 HTML 有效，从而能够进行逐步灰度。当然也存在上面提及的兼容性问题，但如果现在是在移动端上，或者在可预期的浏览器内核上跑的话，在兼容性满足的情况下，那还是可以通过这个方式进行 Report-Only。结合自己业务的资源情况以及在 Chrome 上调试制定初步方案。<br>　　2. 使用 HTTP Header 的 Content-Security-Policy-Report-Only 方式进一步确定方案<br>　　由于上面的 Meta 标签存在一定的兼容问题，所以当我们制定了初步方案后，就可以开始使用 HTTP Header 的形式，小心驶得万年船，这里还是建议先使用 Report-Only 的方式，并指定上报的 url 来收集阻止的内容，通过上报的数据进行方案的优化，从而进一步确定具体方案。<br>　　3. HTTP Header 改用 Content-Security-Policy 策略进行实际拦截阻止<br>　　具体的 CSP 方案经过上面两轮洗礼，在分析完上报的数据，确定百无疏漏后，可将HTTP Header 改用 Content-Security-Policy 策略，从而进行实际拦截阻止。</p>
+<h3 id="相关链接"><a href="#相关链接" class="headerlink" title="相关链接"></a>相关链接</h3><p><a target="_blank" rel="noopener" href="http://mt.sohu.com/20160620/n455409002.shtml">XSS终结者-CSP理论与实践</a><br><a target="_blank" rel="noopener" href="https://developer.mozilla.org/zh-CN/docs/Web/Security/CSP/CSP_policy_directives">CSP 策略指令</a></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" rel="tag"><i class="fa fa-tag"></i> 前端安全</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2017/04/02/github%E6%8D%A2coding/" rel="prev" title="从github到coding - blog">
+      <i class="fa fa-chevron-left"></i> 从github到coding - blog
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2017/06/21/%E9%87%8D%E5%86%99%E6%B5%8F%E8%A7%88%E5%99%A8alert/" rel="next" title="简单的JQ-alert插件">
+      简单的JQ-alert插件 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E5%AF%B9XSS%E7%BB%88%E7%BB%93%E8%80%85CSP%E7%9A%84%E5%AD%A6%E4%B9%A0"><span class="nav-number">1.</span> <span class="nav-text">关于对XSS终结者CSP的学习</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSP%E6%A6%82%E5%BF%B5"><span class="nav-number">2.</span> <span class="nav-text">CSP概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP%E5%8F%91%E5%B1%95%E6%97%B6%E9%97%B4%E8%BD%B4"><span class="nav-number">2.1.</span> <span class="nav-text">CSP发展时间轴</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSP%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.</span> <span class="nav-text">CSP类型</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CSP%E7%A4%BA%E4%BE%8B"><span class="nav-number">4.</span> <span class="nav-text">CSP示例</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#HTML-Meta-%E6%A0%87%E7%AD%BE"><span class="nav-number">4.1.</span> <span class="nav-text">HTML Meta 标签</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#HTTP-Header"><span class="nav-number"></span> <span class="nav-text">HTTP Header</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSP%E5%B1%9E%E6%80%A7%E6%8C%87%E4%BB%A4"><span class="nav-number">1.</span> <span class="nav-text">CSP属性指令</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#CSP%E5%AE%9E%E8%B7%B5%E7%BB%8F%E9%AA%8C"><span class="nav-number">1.1.</span> <span class="nav-text">CSP实践经验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E9%93%BE%E6%8E%A5"><span class="nav-number">1.2.</span> <span class="nav-text">相关链接</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="elmer li"
+      src="https://blog-1256757196.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">elmer li</p>
+  <div class="site-description" itemprop="description">生活不止眼前的苟且，要看向远方</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+  <div class="widget-wrap">
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="220" height="220" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript%EF%BC%8CJQuery/" rel="tag">JavaScript，JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Typescript/" rel="tag">Typescript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" rel="tag">前端安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E5%B7%A5%E5%85%B7/" rel="tag">前端，工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%EF%BC%8C%E6%96%87%E7%AB%A0/" rel="tag">博客，文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" rel="tag">构建工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">8</span></li></ul>
+          </canvas>
+      </div>
+  </div>
+
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Tanelmer" title="GitHub → https://github.com/Tanelmer" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/elmerlixinyi" title="Weibo → https://weibo.com/elmerlixinyi" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jeizas.me/" title="http://www.jeizas.me/" rel="noopener" target="_blank">jeizas</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.vlsion.top/" title="http://www.vlsion.top/" rel="noopener" target="_blank">vlsion</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://101.35.17.130/" title="http://101.35.17.130/" rel="noopener" target="_blank">作草分茶</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">elmer li</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdnjs.cloudflare.com/ajax/libs/valine/1.4.18/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'UoVbSVpFWSCR4s977vJ8Wg6d-gzGzoHsz',
+      appKey     : '8e00hPe2wOJ5Xf1PVqj9tSwh',
+      placeholder: "来都来了，说点什么吧。。",
+      avatar     : 'wavatar',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

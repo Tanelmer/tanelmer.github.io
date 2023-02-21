@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tanelmer.coding.me","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="vue-cli脚手架工具的熟悉与配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="webpack-vue-cli配置详解">
+<meta property="og:url" content="http://tanelmer.coding.me/tanelmer/2018/09/12/webpack-vue-cli%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="elmer - 尘埃落定">
+<meta property="og:description" content="vue-cli脚手架工具的熟悉与配置">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-09-11T16:00:00.000Z">
+<meta property="article:modified_time" content="2022-04-02T11:13:14.000Z">
+<meta property="article:author" content="elmer li">
+<meta property="article:tag" content="Vue">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://tanelmer.coding.me/tanelmer/2018/09/12/webpack-vue-cli%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>webpack-vue-cli配置详解 | elmer - 尘埃落定</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb688712cefd32171d64e51724471c15";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">elmer - 尘埃落定</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱学习，爱生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tanelmer.coding.me/tanelmer/2018/09/12/webpack-vue-cli%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-1256757196.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+      <meta itemprop="name" content="elmer li">
+      <meta itemprop="description" content="生活不止眼前的苟且，要看向远方">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="elmer - 尘埃落定">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          webpack-vue-cli配置详解
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-09-12 00:00:00" itemprop="dateCreated datePublished" datetime="2018-09-12T00:00:00+08:00">2018-09-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-04-02 19:13:14" itemprop="dateModified" datetime="2022-04-02T19:13:14+08:00">2022-04-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/09/12/webpack-vue-cli%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/09/12/webpack-vue-cli%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>17k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>15 分钟</span>
+            </span>
+            <div class="post-description">vue-cli脚手架工具的熟悉与配置</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="vue-cli脚手架工具的熟悉与配置"><a href="#vue-cli脚手架工具的熟悉与配置" class="headerlink" title="vue-cli脚手架工具的熟悉与配置"></a>vue-cli脚手架工具的熟悉与配置</h2><p>这里主要看几个配置文件里面是干了一些什么事情，基本上分析完之后就知道了。</p>
+<span id="more"></span>
+<hr>
+<h4 id="bulid文件夹"><a href="#bulid文件夹" class="headerlink" title="bulid文件夹"></a>bulid文件夹</h4><ol>
+<li>build.js</li>
+<li>webpack.base.conf.js</li>
+<li>webpack.dev.conf.js</li>
+<li>webpack.prod.conf.js</li>
+<li>dev-server.js</li>
+<li>utils.js</li>
+</ol>
+<hr>
+<h4 id="config文件夹"><a href="#config文件夹" class="headerlink" title="config文件夹"></a>config文件夹</h4><ol>
+<li>index.js</li>
+</ol>
+<hr>
+<p>然后我们具体看下文件里的代码<br>bluid.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 1. loading动画</span></span><br><span class="line"><span class="comment"> 2. 删除创建目标文件夹</span></span><br><span class="line"><span class="comment"> 3. webpack编译</span></span><br><span class="line"><span class="comment"> 4. 输出信息</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;./check-versions&#x27;</span>)()</span><br><span class="line"></span><br><span class="line">process.<span class="property">env</span>.<span class="property">NODE_ENV</span> = <span class="string">&#x27;production&#x27;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> ora = <span class="built_in">require</span>(<span class="string">&#x27;ora&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> rm = <span class="built_in">require</span>(<span class="string">&#x27;rimraf&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="comment">// 用于在控制台输出带颜色字体的插件</span></span><br><span class="line"><span class="keyword">var</span> chalk = <span class="built_in">require</span>(<span class="string">&#x27;chalk&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">&#x27;../config&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> webpackConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.prod.conf&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> spinner = <span class="title function_">ora</span>(<span class="string">&#x27;building for production...&#x27;</span>)</span><br><span class="line">spinner.<span class="title function_">start</span>() <span class="comment">//开启loading动画</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归删除旧的目标文件夹</span></span><br><span class="line"><span class="title function_">rm</span>(path.<span class="title function_">join</span>(config.<span class="property">build</span>.<span class="property">assetsRoot</span>, config.<span class="property">build</span>.<span class="property">assetsSubDirectory</span>), <span class="function"><span class="params">err</span> =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">if</span> (err) <span class="keyword">throw</span> err</span><br><span class="line">  <span class="comment">// webpack编译</span></span><br><span class="line">  <span class="title function_">webpack</span>(webpackConfig, <span class="keyword">function</span> (<span class="params">err, stats</span>) &#123;</span><br><span class="line">    spinner.<span class="title function_">stop</span>()</span><br><span class="line">    <span class="keyword">if</span> (err) <span class="keyword">throw</span> err</span><br><span class="line">    process.<span class="property">stdout</span>.<span class="title function_">write</span>(stats.<span class="title function_">toString</span>(&#123;</span><br><span class="line">      <span class="attr">colors</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">modules</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">children</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">chunks</span>: <span class="literal">false</span>,</span><br><span class="line">      <span class="attr">chunkModules</span>: <span class="literal">false</span></span><br><span class="line">    &#125;) + <span class="string">&#x27;\n\n&#x27;</span>)</span><br><span class="line"></span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(chalk.<span class="title function_">cyan</span>(<span class="string">&#x27;  Build complete.\n&#x27;</span>))</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(chalk.<span class="title function_">yellow</span>(</span><br><span class="line">      <span class="string">&#x27;  Tip: built files are meant to be served over an HTTP server.\n&#x27;</span> +</span><br><span class="line">      <span class="string">&#x27;  Opening index.html over file:// won\&#x27;t work.\n&#x27;</span></span><br><span class="line">    ))</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="string">``</span><span class="string">`  </span></span><br><span class="line"><span class="string">webpack.base.conf.js</span></span><br><span class="line"><span class="string">`</span><span class="string">``</span>javascript</span><br><span class="line"><span class="comment">//引入依赖包</span></span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> utils = <span class="built_in">require</span>(<span class="string">&#x27;./utils&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">&#x27;../config&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> vueLoaderConfig = <span class="built_in">require</span>(<span class="string">&#x27;./vue-loader.conf&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">resolve</span> (dir) &#123;</span><br><span class="line">  <span class="keyword">return</span> path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;..&#x27;</span>, dir)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">// 入口文件，路径相对于本文件所在的位置，可以写成字符串、数组、对象</span></span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="comment">// path.resolve([from ...], to) 将to参数解析为绝对路径</span></span><br><span class="line">    <span class="attr">app</span>: <span class="string">&#x27;./src/main.js&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 输出配置</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="comment">// 输出文件，路径相对于本文件所在的位置</span></span><br><span class="line">    <span class="attr">path</span>: config.<span class="property">build</span>.<span class="property">assetsRoot</span>,</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].js&#x27;</span>,</span><br><span class="line">    <span class="comment">// publicPath</span></span><br><span class="line">    <span class="comment">// 1.该属性的好处在于当你配置了图片CDN的地址，本地开发时引用本地的图片资源，上线打包时就将资源全部指向正式了，</span></span><br><span class="line">    <span class="comment">// 如果没有确定的发布地址不建议配置该属性，特别是在打包图片时，路径很容易出现混乱，如果没有设置，则默认从站点根目录加载</span></span><br><span class="line">    <span class="attr">publicPath</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span></span><br><span class="line">      ? config.<span class="property">build</span>.<span class="property">assetsPublicPath</span></span><br><span class="line">      : config.<span class="property">dev</span>.<span class="property">assetsPublicPath</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">resolve</span>: &#123;</span><br><span class="line">    <span class="comment">// require时省略的扩展名，遇到.js、.vue、.json结尾的也要去加载</span></span><br><span class="line">    <span class="attr">extensions</span>: [<span class="string">&#x27;.js&#x27;</span>, <span class="string">&#x27;.vue&#x27;</span>, <span class="string">&#x27;.json&#x27;</span>],</span><br><span class="line"></span><br><span class="line">    <span class="comment">//模块别名地址，方便后续直接引用别名，无须写长长的地址，注意如果后续不能识别该别名，需要先设置root</span></span><br><span class="line">    <span class="comment">//设置别名 是为了使用独立构建 npm默认是使用运行时构建 vue官网有两种构建方式的区别</span></span><br><span class="line">    <span class="attr">alias</span>: &#123;</span><br><span class="line">      <span class="string">&#x27;vue$&#x27;</span>: <span class="string">&#x27;vue/dist/vue.esm.js&#x27;</span>,</span><br><span class="line">      <span class="string">&#x27;@&#x27;</span>: <span class="title function_">resolve</span>(<span class="string">&#x27;src&#x27;</span>)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">//模块加载器</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: [</span><br><span class="line">      <span class="comment">// loader相当于gulp里的task，用来处理在入口文件中require的和其他方式引用进来的文件，</span></span><br><span class="line">      <span class="comment">// test是正则表达式，匹配要处理的文件；</span></span><br><span class="line">      <span class="comment">// loader匹配要使用的loader，&quot;-loader&quot;可以省略；</span></span><br><span class="line">      <span class="comment">// include把要处理的目录包括进来，exclude排除不处理的目录</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.vue$/</span>,</span><br><span class="line">        <span class="attr">loader</span>: <span class="string">&#x27;vue-loader&#x27;</span>,</span><br><span class="line">        <span class="attr">options</span>: vueLoaderConfig</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.js$/</span>,</span><br><span class="line">        <span class="attr">loader</span>: <span class="string">&#x27;babel-loader&#x27;</span>,</span><br><span class="line">        <span class="attr">include</span>: [<span class="title function_">resolve</span>(<span class="string">&#x27;src&#x27;</span>), <span class="title function_">resolve</span>(<span class="string">&#x27;test&#x27;</span>)]</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(png|jpe?g|gif|svg)(\?.*)?$/</span>,</span><br><span class="line">        <span class="attr">loader</span>: <span class="string">&#x27;url-loader&#x27;</span>,</span><br><span class="line">        <span class="comment">// 把较小的图片转换成base64的字符串内嵌在生成的js文件里 name指明了输出的命名规则</span></span><br><span class="line">        <span class="attr">options</span>: &#123;</span><br><span class="line">          <span class="attr">limit</span>: <span class="number">10000</span>,</span><br><span class="line">          <span class="attr">name</span>: utils.<span class="title function_">assetsPath</span>(<span class="string">&#x27;img/[name].[hash:7].[ext]&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;,</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">test</span>: <span class="regexp">/\.(woff2?|eot|ttf|otf)(\?.*)?$/</span>,</span><br><span class="line">        <span class="attr">loader</span>: <span class="string">&#x27;url-loader&#x27;</span>,</span><br><span class="line">        <span class="comment">// 把较小的图标转换成base64的字符串内嵌在生成的js文件里 name指明了输出的命名规则</span></span><br><span class="line">        <span class="attr">options</span>: &#123;</span><br><span class="line">          <span class="attr">limit</span>: <span class="number">10000</span>,</span><br><span class="line">          <span class="attr">name</span>: utils.<span class="title function_">assetsPath</span>(<span class="string">&#x27;fonts/[name].[hash:7].[ext]&#x27;</span>)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>webpack.dev.conf.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// webpack.dev.conf.js在webpack.base.conf的基础上增加完善了开发环境下面的配置</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 1.将hot-reload相关的代码添加到entry chunks</span></span><br><span class="line"><span class="comment"> 2.合并基础的webpack配置</span></span><br><span class="line"><span class="comment"> 3.使用styleLoaders</span></span><br><span class="line"><span class="comment"> 4.配置Source Maps</span></span><br><span class="line"><span class="comment"> 5.配置webpack插件</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="comment">// 引入相关依赖</span></span><br><span class="line"><span class="keyword">var</span> utils = <span class="built_in">require</span>(<span class="string">&#x27;./utils&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">&#x27;../config&#x27;</span>)</span><br><span class="line"><span class="comment">// 一个可以合并数组和对象的插件</span></span><br><span class="line"><span class="keyword">var</span> merge = <span class="built_in">require</span>(<span class="string">&#x27;webpack-merge&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> baseWebpackConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.base.conf&#x27;</span>)</span><br><span class="line"><span class="comment">// 一个用于生成HTML文件并自动注入依赖文件（link/script）的webpack插件</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">HtmlWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="comment">// 用于更友好地输出webpack的警告、错误等信息</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">FriendlyErrorsPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;friendly-errors-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// add hot-reload related code to entry chunks</span></span><br><span class="line"><span class="comment">// 这是上面的第一点 热重载与entry相关联</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(baseWebpackConfig.<span class="property">entry</span>).<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">name</span>) &#123;</span><br><span class="line">  baseWebpackConfig.<span class="property">entry</span>[name] = [<span class="string">&#x27;./build/dev-client&#x27;</span>].<span class="title function_">concat</span>(baseWebpackConfig.<span class="property">entry</span>[name])</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并基础的webpack配置</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = <span class="title function_">merge</span>(baseWebpackConfig, &#123;</span><br><span class="line">  <span class="comment">// 配置样式文件的处理规则，使用styleLoaders</span></span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: utils.<span class="title function_">styleLoaders</span>(&#123; <span class="attr">sourceMap</span>: config.<span class="property">dev</span>.<span class="property">cssSourceMap</span> &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// cheap-module-eval-source-map is faster for development</span></span><br><span class="line">  <span class="comment">// 配置Source Maps。在开发中使用cheap-module-eval-source-map更快 这是纯翻译~~~ 晚点去找找这个玩意干啥的</span></span><br><span class="line">  <span class="attr">devtool</span>: <span class="string">&#x27;#cheap-module-eval-source-map&#x27;</span>,</span><br><span class="line">  <span class="comment">// webpack插件配置</span></span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="keyword">new</span> webpack.<span class="title class_">DefinePlugin</span>(&#123;</span><br><span class="line">      <span class="string">&#x27;process.env&#x27;</span>: config.<span class="property">dev</span>.<span class="property">env</span></span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// https://github.com/glenjamin/webpack-hot-middleware#installation--usage</span></span><br><span class="line">    <span class="keyword">new</span> webpack.<span class="title class_">HotModuleReplacementPlugin</span>(),</span><br><span class="line">    <span class="comment">// 报错不会阻塞，但是会在编译结束后报错</span></span><br><span class="line">    <span class="keyword">new</span> webpack.<span class="title class_">NoEmitOnErrorsPlugin</span>(),</span><br><span class="line">    <span class="comment">// https://github.com/ampedandwired/html-webpack-plugin</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">filename</span>: <span class="string">&#x27;index.html&#x27;</span>,</span><br><span class="line">      <span class="attr">template</span>: <span class="string">&#x27;index.html&#x27;</span>,</span><br><span class="line">      <span class="attr">inject</span>: <span class="literal">true</span></span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">FriendlyErrorsPlugin</span>()</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>webpack.prod.conf.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 构建的时候用到的webpack配置来自webpack.prod.conf.js，该配置同样是在webpack.base.conf基础上的进一步完善。</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 1. 合并基础的webpack配置</span></span><br><span class="line"><span class="comment"> 2. 使用styleLoaders</span></span><br><span class="line"><span class="comment"> 3. 配置webpack的输出</span></span><br><span class="line"><span class="comment"> 4. 配置webpack插件</span></span><br><span class="line"><span class="comment"> 5. gzip模式下的webpack插件配置</span></span><br><span class="line"><span class="comment"> 6. webpack-bundle分析</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> utils = <span class="built_in">require</span>(<span class="string">&#x27;./utils&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">&#x27;../config&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> merge = <span class="built_in">require</span>(<span class="string">&#x27;webpack-merge&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> baseWebpackConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.base.conf&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">CopyWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;copy-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">HtmlWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;html-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="comment">// 用于从webpack生成的bundle中提取文本到特定文件中的插件</span></span><br><span class="line"><span class="comment">// 可以抽取出css，js文件将其与webpack输出的bundle分离</span></span><br><span class="line"><span class="keyword">var</span> <span class="title class_">ExtractTextPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;extract-text-webpack-plugin&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">OptimizeCSSPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;optimize-css-assets-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> env = config.<span class="property">build</span>.<span class="property">env</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 合并基础的webpack配置</span></span><br><span class="line"><span class="keyword">var</span> webpackConfig = <span class="title function_">merge</span>(baseWebpackConfig, &#123;</span><br><span class="line">  <span class="attr">module</span>: &#123;</span><br><span class="line">    <span class="attr">rules</span>: utils.<span class="title function_">styleLoaders</span>(&#123;</span><br><span class="line">      <span class="attr">sourceMap</span>: config.<span class="property">build</span>.<span class="property">productionSourceMap</span>,</span><br><span class="line">      <span class="attr">extract</span>: <span class="literal">true</span></span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">devtool</span>: config.<span class="property">build</span>.<span class="property">productionSourceMap</span> ? <span class="string">&#x27;#source-map&#x27;</span> : <span class="literal">false</span>,</span><br><span class="line">  <span class="comment">// 配置webpack的输出</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">path</span>: config.<span class="property">build</span>.<span class="property">assetsRoot</span>,</span><br><span class="line">    <span class="attr">filename</span>: utils.<span class="title function_">assetsPath</span>(<span class="string">&#x27;js/[name].[chunkhash].js&#x27;</span>),</span><br><span class="line">    <span class="attr">chunkFilename</span>: utils.<span class="title function_">assetsPath</span>(<span class="string">&#x27;js/[id].[chunkhash].js&#x27;</span>)</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">plugins</span>: [</span><br><span class="line">    <span class="comment">// http://vuejs.github.io/vue-loader/en/workflow/production.html</span></span><br><span class="line">    <span class="keyword">new</span> webpack.<span class="title class_">DefinePlugin</span>(&#123;</span><br><span class="line">      <span class="string">&#x27;process.env&#x27;</span>: env</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// 丑化压缩代码</span></span><br><span class="line">    <span class="keyword">new</span> webpack.<span class="property">optimize</span>.<span class="title class_">UglifyJsPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">compress</span>: &#123;</span><br><span class="line">        <span class="attr">warnings</span>: <span class="literal">false</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="attr">sourceMap</span>: <span class="literal">true</span></span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// extract css into its own file</span></span><br><span class="line">    <span class="comment">// 抽离css文件</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">ExtractTextPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">filename</span>: utils.<span class="title function_">assetsPath</span>(<span class="string">&#x27;css/[name].[contenthash].css&#x27;</span>)</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// Compress extracted CSS. We are using this plugin so that possible</span></span><br><span class="line">    <span class="comment">// duplicated CSS from different components can be deduped.</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">OptimizeCSSPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">cssProcessorOptions</span>: &#123;</span><br><span class="line">        <span class="attr">safe</span>: <span class="literal">true</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// generate dist index.html with correct asset hash for caching.</span></span><br><span class="line">    <span class="comment">// you can customize output by editing /index.html</span></span><br><span class="line">    <span class="comment">// see https://github.com/ampedandwired/html-webpack-plugin</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">HtmlWebpackPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">filename</span>: config.<span class="property">build</span>.<span class="property">index</span>,</span><br><span class="line">      <span class="attr">template</span>: <span class="string">&#x27;index.html&#x27;</span>,</span><br><span class="line">      <span class="attr">inject</span>: <span class="literal">true</span>,</span><br><span class="line">      <span class="attr">minify</span>: &#123;</span><br><span class="line">        <span class="attr">removeComments</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">collapseWhitespace</span>: <span class="literal">true</span>,</span><br><span class="line">        <span class="attr">removeAttributeQuotes</span>: <span class="literal">true</span></span><br><span class="line">        <span class="comment">// more options:</span></span><br><span class="line">        <span class="comment">// https://github.com/kangax/html-minifier#options-quick-reference</span></span><br><span class="line">      &#125;,</span><br><span class="line">      <span class="comment">// necessary to consistently work with multiple chunks via CommonsChunkPlugin</span></span><br><span class="line">      <span class="attr">chunksSortMode</span>: <span class="string">&#x27;dependency&#x27;</span></span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// split vendor js into its own file</span></span><br><span class="line">    <span class="keyword">new</span> webpack.<span class="property">optimize</span>.<span class="title class_">CommonsChunkPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;vendor&#x27;</span>,</span><br><span class="line">      <span class="attr">minChunks</span>: <span class="keyword">function</span> (<span class="params"><span class="variable language_">module</span>, count</span>) &#123;</span><br><span class="line">        <span class="comment">// any required modules inside node_modules are extracted to vendor</span></span><br><span class="line">        <span class="keyword">return</span> (</span><br><span class="line">          <span class="variable language_">module</span>.<span class="property">resource</span> &amp;&amp;</span><br><span class="line">          <span class="regexp">/\.js$/</span>.<span class="title function_">test</span>(<span class="variable language_">module</span>.<span class="property">resource</span>) &amp;&amp;</span><br><span class="line">          <span class="variable language_">module</span>.<span class="property">resource</span>.<span class="title function_">indexOf</span>(</span><br><span class="line">            path.<span class="title function_">join</span>(__dirname, <span class="string">&#x27;../node_modules&#x27;</span>)</span><br><span class="line">          ) === <span class="number">0</span></span><br><span class="line">        )</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// extract webpack runtime and module manifest to its own file in order to</span></span><br><span class="line">    <span class="comment">// prevent vendor hash from being updated whenever app bundle is updated</span></span><br><span class="line">    <span class="keyword">new</span> webpack.<span class="property">optimize</span>.<span class="title class_">CommonsChunkPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">name</span>: <span class="string">&#x27;manifest&#x27;</span>,</span><br><span class="line">      <span class="attr">chunks</span>: [<span class="string">&#x27;vendor&#x27;</span>]</span><br><span class="line">    &#125;),</span><br><span class="line">    <span class="comment">// copy custom static assets</span></span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">CopyWebpackPlugin</span>([</span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">from</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;../static&#x27;</span>),</span><br><span class="line">        <span class="attr">to</span>: config.<span class="property">build</span>.<span class="property">assetsSubDirectory</span>,</span><br><span class="line">        <span class="attr">ignore</span>: [<span class="string">&#x27;.*&#x27;</span>]</span><br><span class="line">      &#125;</span><br><span class="line">    ])</span><br><span class="line">  ]</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// gzip模式下需要引入compression插件进行压缩</span></span><br><span class="line"><span class="keyword">if</span> (config.<span class="property">build</span>.<span class="property">productionGzip</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="title class_">CompressionWebpackPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;compression-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line">  webpackConfig.<span class="property">plugins</span>.<span class="title function_">push</span>(</span><br><span class="line">    <span class="keyword">new</span> <span class="title class_">CompressionWebpackPlugin</span>(&#123;</span><br><span class="line">      <span class="attr">asset</span>: <span class="string">&#x27;[path].gz[query]&#x27;</span>,</span><br><span class="line">      <span class="attr">algorithm</span>: <span class="string">&#x27;gzip&#x27;</span>,</span><br><span class="line">      <span class="attr">test</span>: <span class="keyword">new</span> <span class="title class_">RegExp</span>(</span><br><span class="line">        <span class="string">&#x27;\\.(&#x27;</span> +</span><br><span class="line">        config.<span class="property">build</span>.<span class="property">productionGzipExtensions</span>.<span class="title function_">join</span>(<span class="string">&#x27;|&#x27;</span>) +</span><br><span class="line">        <span class="string">&#x27;)$&#x27;</span></span><br><span class="line">      ),</span><br><span class="line">      <span class="attr">threshold</span>: <span class="number">10240</span>,</span><br><span class="line">      <span class="attr">minRatio</span>: <span class="number">0.8</span></span><br><span class="line">    &#125;)</span><br><span class="line">  )</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> (config.<span class="property">build</span>.<span class="property">bundleAnalyzerReport</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> <span class="title class_">BundleAnalyzerPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;webpack-bundle-analyzer&#x27;</span>).<span class="property">BundleAnalyzerPlugin</span></span><br><span class="line">  webpackConfig.<span class="property">plugins</span>.<span class="title function_">push</span>(<span class="keyword">new</span> <span class="title class_">BundleAnalyzerPlugin</span>())</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = webpackConfig</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>dev-server.js<br>首先来看执行”npm run dev”时候最先执行的build&#x2F;dev-server.js文件。该文件主要完成下面几件事情：</p>
+<ol>
+<li>检查node和npm的版本</li>
+<li>引入相关插件和配置</li>
+<li>创建express服务器和webpack编译器</li>
+<li>配置开发中间件（webpack-dev-middleware）和热重载中间件（webpack-hot-middleware）</li>
+<li>挂载代理服务和中间件</li>
+<li>配置静态资源</li>
+<li>启动服务器监听特定端口（8080）</li>
+<li>自动打开浏览器并打开特定网址（localhost:8080）<br>说明： express服务器提供静态文件服务，不过它还使用了http-proxy-middleware，一个http请求代理的中间件。前端开发过程中需要使用到后台的API的话，可以通过配置proxyTable来将相应的后台请求代理到专用的API服务器<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 检查NodeJS和npm的版本</span></span><br><span class="line"><span class="built_in">require</span>(<span class="string">&#x27;./check-versions&#x27;</span>)()</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">&#x27;../config&#x27;</span>)</span><br><span class="line"><span class="comment">// 如果Node的环境变量中没有设置当前的环境（NODE_ENV），则使用config中的配置作为当前的环境</span></span><br><span class="line"><span class="keyword">if</span> (!process.<span class="property">env</span>.<span class="property">NODE_ENV</span>) &#123;</span><br><span class="line">  process.<span class="property">env</span>.<span class="property">NODE_ENV</span> = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(config.<span class="property">dev</span>.<span class="property">env</span>.<span class="property">NODE_ENV</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个可以调用默认软件打开网址、图片、文件等内容的插件</span></span><br><span class="line"><span class="comment">// 这里用它来调用默认浏览器打开dev-server监听的端口，例如：localhost:8080</span></span><br><span class="line"><span class="keyword">var</span> opn = <span class="built_in">require</span>(<span class="string">&#x27;opn&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> express = <span class="built_in">require</span>(<span class="string">&#x27;express&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> webpack = <span class="built_in">require</span>(<span class="string">&#x27;webpack&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 一个express中间件，用于将http请求代理到其他服务器</span></span><br><span class="line"><span class="comment">// 例：localhost:8080/api/xxx  --&gt;  localhost:3000/api/xxx</span></span><br><span class="line"><span class="comment">// 这里使用该插件可以将前端开发中涉及到的请求代理到API服务器上，方便与服务器对接</span></span><br><span class="line"><span class="keyword">var</span> proxyMiddleware = <span class="built_in">require</span>(<span class="string">&#x27;http-proxy-middleware&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> webpackConfig = <span class="built_in">require</span>(<span class="string">&#x27;./webpack.dev.conf&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment">// default port where dev server listens for incoming traffic</span></span><br><span class="line"><span class="comment">// dev-server 监听的端口，默认为config.dev.port设置的端口，即8080</span></span><br><span class="line"><span class="keyword">var</span> port = process.<span class="property">env</span>.<span class="property">PORT</span> || config.<span class="property">dev</span>.<span class="property">port</span></span><br><span class="line"><span class="comment">// automatically open browser, if not set will be false</span></span><br><span class="line"><span class="comment">// 用于判断是否要自动打开浏览器的布尔变量，当配置文件中没有设置自动打开浏览器的时候其值为 false</span></span><br><span class="line"><span class="keyword">var</span> autoOpenBrowser = !!config.<span class="property">dev</span>.<span class="property">autoOpenBrowser</span></span><br><span class="line"><span class="comment">// Define HTTP proxies to your custom API backend</span></span><br><span class="line"><span class="comment">// https://github.com/chimurai/http-proxy-middleware</span></span><br><span class="line"><span class="comment">// 定义 HTTP 代理表，代理到 API 服务器</span></span><br><span class="line"><span class="keyword">var</span> proxyTable = config.<span class="property">dev</span>.<span class="property">proxyTable</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> app = <span class="title function_">express</span>()</span><br><span class="line"><span class="comment">// 根据webpack配置文件创建Compiler对象</span></span><br><span class="line"><span class="keyword">var</span> compiler = <span class="title function_">webpack</span>(webpackConfig)</span><br><span class="line"></span><br><span class="line"><span class="comment">// webpack-dev-middleware使用compiler对象来对相应的文件进行编译和绑定</span></span><br><span class="line"><span class="comment">// 编译绑定后将得到的产物存放在内存中而没有写进磁盘</span></span><br><span class="line"><span class="comment">// 将这个中间件交给express使用之后即可访问这些编译后的产品文件</span></span><br><span class="line"><span class="keyword">var</span> devMiddleware = <span class="built_in">require</span>(<span class="string">&#x27;webpack-dev-middleware&#x27;</span>)(compiler, &#123;</span><br><span class="line">  <span class="attr">publicPath</span>: webpackConfig.<span class="property">output</span>.<span class="property">publicPath</span>,</span><br><span class="line">  <span class="attr">quiet</span>: <span class="literal">true</span></span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// webpack-hot-middleware，用于实现热重载功能的中间件</span></span><br><span class="line"><span class="keyword">var</span> hotMiddleware = <span class="built_in">require</span>(<span class="string">&#x27;webpack-hot-middleware&#x27;</span>)(compiler, &#123;</span><br><span class="line">  <span class="attr">log</span>: <span class="function">() =&gt;</span> &#123;&#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// force page reload when html-webpack-plugin template changes</span></span><br><span class="line"><span class="comment">// 当html-webpack-plugin提交之后通过热重载中间件发布重载动作使得页面重载</span></span><br><span class="line">compiler.<span class="title function_">plugin</span>(<span class="string">&#x27;compilation&#x27;</span>, <span class="keyword">function</span> (<span class="params">compilation</span>) &#123;</span><br><span class="line">  compilation.<span class="title function_">plugin</span>(<span class="string">&#x27;html-webpack-plugin-after-emit&#x27;</span>, <span class="keyword">function</span> (<span class="params">data, cb</span>) &#123;</span><br><span class="line">    hotMiddleware.<span class="title function_">publish</span>(&#123; <span class="attr">action</span>: <span class="string">&#x27;reload&#x27;</span> &#125;)</span><br><span class="line">    <span class="title function_">cb</span>()</span><br><span class="line">  &#125;)</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// proxy api requests</span></span><br><span class="line"><span class="comment">// 将 proxyTable 中的代理请求配置挂在到express服务器上</span></span><br><span class="line"><span class="title class_">Object</span>.<span class="title function_">keys</span>(proxyTable).<span class="title function_">forEach</span>(<span class="keyword">function</span> (<span class="params">context</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> options = proxyTable[context]</span><br><span class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> options === <span class="string">&#x27;string&#x27;</span>) &#123;</span><br><span class="line">    options = &#123; <span class="attr">target</span>: options &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  app.<span class="title function_">use</span>(<span class="title function_">proxyMiddleware</span>(options.<span class="property">filter</span> || context, options))</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// handle fallback for HTML5 history API</span></span><br><span class="line"><span class="comment">// 重定向不存在的URL，常用于SPA</span></span><br><span class="line">app.<span class="title function_">use</span>(<span class="built_in">require</span>(<span class="string">&#x27;connect-history-api-fallback&#x27;</span>)())</span><br><span class="line"></span><br><span class="line"><span class="comment">// serve webpack bundle output</span></span><br><span class="line"><span class="comment">// 使用webpack开发中间件</span></span><br><span class="line"><span class="comment">// 即将webpack编译后输出到内存中的文件资源挂到express服务器上</span></span><br><span class="line">app.<span class="title function_">use</span>(devMiddleware)</span><br><span class="line"></span><br><span class="line"><span class="comment">// enable hot-reload and state-preserving</span></span><br><span class="line"><span class="comment">// compilation error display</span></span><br><span class="line"><span class="comment">// 将热重载中间件挂在到express服务器上</span></span><br><span class="line">app.<span class="title function_">use</span>(hotMiddleware)</span><br><span class="line"></span><br><span class="line"><span class="comment">// serve pure static assets</span></span><br><span class="line"><span class="comment">// 将静态资源挂到express服务器上</span></span><br><span class="line"><span class="keyword">var</span> staticPath = path.<span class="property">posix</span>.<span class="title function_">join</span>(config.<span class="property">dev</span>.<span class="property">assetsPublicPath</span>, config.<span class="property">dev</span>.<span class="property">assetsSubDirectory</span>)</span><br><span class="line">app.<span class="title function_">use</span>(staticPath, express.<span class="title function_">static</span>(<span class="string">&#x27;./static&#x27;</span>))</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> uri = <span class="string">&#x27;http://localhost:&#x27;</span> + port</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> _resolve</span><br><span class="line"><span class="keyword">var</span> readyPromise = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function"><span class="params">resolve</span> =&gt;</span> &#123;</span><br><span class="line">  _resolve = resolve</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 控制台输入启动信息</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;&gt; Starting dev server...&#x27;</span>)</span><br><span class="line">devMiddleware.<span class="title function_">waitUntilValid</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;&gt; Listening at &#x27;</span> + uri + <span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">  <span class="comment">// when env is testing, don&#x27;t need open it</span></span><br><span class="line">  <span class="keyword">if</span> (autoOpenBrowser &amp;&amp; process.<span class="property">env</span>.<span class="property">NODE_ENV</span> !== <span class="string">&#x27;testing&#x27;</span>) &#123;</span><br><span class="line">    <span class="title function_">opn</span>(uri)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="title function_">_resolve</span>()</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="comment">// 监听端口</span></span><br><span class="line"><span class="keyword">var</span> server = app.<span class="title function_">listen</span>(port)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">ready</span>: readyPromise,</span><br><span class="line">  <span class="attr">close</span>: <span class="function">() =&gt;</span> &#123;</span><br><span class="line">    server.<span class="title function_">close</span>()</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+utils.js<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> 1. 配置静态资源路径</span></span><br><span class="line"><span class="comment"> 2. 生成cssLoaders用于加载.vue文件中的样式</span></span><br><span class="line"><span class="comment"> 3. 生成styleLoaders用于加载不在.vue文件中的单独存在的样式文件</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> config = <span class="built_in">require</span>(<span class="string">&#x27;../config&#x27;</span>)</span><br><span class="line"><span class="keyword">var</span> <span class="title class_">ExtractTextPlugin</span> = <span class="built_in">require</span>(<span class="string">&#x27;extract-text-webpack-plugin&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">assetsPath</span> = <span class="keyword">function</span> (<span class="params">_path</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> assetsSubDirectory = process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span></span><br><span class="line">    ? config.<span class="property">build</span>.<span class="property">assetsSubDirectory</span></span><br><span class="line">    : config.<span class="property">dev</span>.<span class="property">assetsSubDirectory</span></span><br><span class="line">  <span class="keyword">return</span> path.<span class="property">posix</span>.<span class="title function_">join</span>(assetsSubDirectory, _path)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">cssLoaders</span> = <span class="keyword">function</span> (<span class="params">options</span>) &#123;</span><br><span class="line">  options = options || &#123;&#125;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> cssLoader = &#123;</span><br><span class="line">    <span class="attr">loader</span>: <span class="string">&#x27;css-loader&#x27;</span>,</span><br><span class="line">    <span class="attr">options</span>: &#123;</span><br><span class="line">      <span class="attr">minimize</span>: process.<span class="property">env</span>.<span class="property">NODE_ENV</span> === <span class="string">&#x27;production&#x27;</span>,</span><br><span class="line">      <span class="attr">sourceMap</span>: options.<span class="property">sourceMap</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// generate loader string to be used with extract text plugin</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">generateLoaders</span> (loader, loaderOptions) &#123;</span><br><span class="line">    <span class="keyword">var</span> loaders = [cssLoader]</span><br><span class="line">    <span class="keyword">if</span> (loader) &#123;</span><br><span class="line">      loaders.<span class="title function_">push</span>(&#123;</span><br><span class="line">        <span class="attr">loader</span>: loader + <span class="string">&#x27;-loader&#x27;</span>,</span><br><span class="line">        <span class="attr">options</span>: <span class="title class_">Object</span>.<span class="title function_">assign</span>(&#123;&#125;, loaderOptions, &#123;</span><br><span class="line">          <span class="attr">sourceMap</span>: options.<span class="property">sourceMap</span></span><br><span class="line">        &#125;)</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// Extract CSS when that option is specified</span></span><br><span class="line">    <span class="comment">// (which is the case during production build)</span></span><br><span class="line">    <span class="keyword">if</span> (options.<span class="property">extract</span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> <span class="title class_">ExtractTextPlugin</span>.<span class="title function_">extract</span>(&#123;</span><br><span class="line">        <span class="attr">use</span>: loaders,</span><br><span class="line">        <span class="attr">fallback</span>: <span class="string">&#x27;vue-style-loader&#x27;</span></span><br><span class="line">      &#125;)</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      <span class="keyword">return</span> [<span class="string">&#x27;vue-style-loader&#x27;</span>].<span class="title function_">concat</span>(loaders)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// https://vue-loader.vuejs.org/en/configurations/extract-css.html</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">css</span>: <span class="title function_">generateLoaders</span>(),</span><br><span class="line">    <span class="attr">postcss</span>: <span class="title function_">generateLoaders</span>(),</span><br><span class="line">    <span class="attr">less</span>: <span class="title function_">generateLoaders</span>(<span class="string">&#x27;less&#x27;</span>),</span><br><span class="line">    <span class="attr">sass</span>: <span class="title function_">generateLoaders</span>(<span class="string">&#x27;sass&#x27;</span>, &#123; <span class="attr">indentedSyntax</span>: <span class="literal">true</span> &#125;),</span><br><span class="line">    <span class="attr">scss</span>: <span class="title function_">generateLoaders</span>(<span class="string">&#x27;sass&#x27;</span>),</span><br><span class="line">    <span class="attr">stylus</span>: <span class="title function_">generateLoaders</span>(<span class="string">&#x27;stylus&#x27;</span>),</span><br><span class="line">    <span class="attr">styl</span>: <span class="title function_">generateLoaders</span>(<span class="string">&#x27;stylus&#x27;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// Generate loaders for standalone style files (outside of .vue)</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">styleLoaders</span> = <span class="keyword">function</span> (<span class="params">options</span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> output = []</span><br><span class="line">  <span class="keyword">var</span> loaders = <span class="built_in">exports</span>.<span class="title function_">cssLoaders</span>(options)</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> extension <span class="keyword">in</span> loaders) &#123;</span><br><span class="line">    <span class="keyword">var</span> loader = loaders[extension]</span><br><span class="line">    output.<span class="title function_">push</span>(&#123;</span><br><span class="line">      <span class="attr">test</span>: <span class="keyword">new</span> <span class="title class_">RegExp</span>(<span class="string">&#x27;\\.&#x27;</span> + extension + <span class="string">&#x27;$&#x27;</span>),</span><br><span class="line">      <span class="attr">use</span>: loader</span><br><span class="line">    &#125;)</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> output</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ol>
+<hr>
+<p>config文件夹下的index.js<br>在这里面描述了开发和构建两种环境下的配置，前面的build文件夹下也有不少文件引用了index.js里面的配置</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// see http://vuejs-templates.github.io/webpack for documentation.</span></span><br><span class="line"><span class="keyword">var</span> path = <span class="built_in">require</span>(<span class="string">&#x27;path&#x27;</span>)</span><br><span class="line"></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">build</span>: &#123;</span><br><span class="line">    <span class="attr">env</span>: <span class="built_in">require</span>(<span class="string">&#x27;./prod.env&#x27;</span>),</span><br><span class="line">    <span class="attr">index</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;../dist/index.html&#x27;</span>),</span><br><span class="line">    <span class="attr">assetsRoot</span>: path.<span class="title function_">resolve</span>(__dirname, <span class="string">&#x27;../dist&#x27;</span>),</span><br><span class="line">    <span class="attr">assetsSubDirectory</span>: <span class="string">&#x27;static&#x27;</span>,</span><br><span class="line">    <span class="attr">assetsPublicPath</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="attr">productionSourceMap</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="comment">// Gzip off by default as many popular static hosts such as</span></span><br><span class="line">    <span class="comment">// Surge or Netlify already gzip all static assets for you.</span></span><br><span class="line">    <span class="comment">// Before setting to `true`, make sure to:</span></span><br><span class="line">    <span class="comment">// npm install --save-dev compression-webpack-plugin</span></span><br><span class="line">    <span class="attr">productionGzip</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">productionGzipExtensions</span>: [<span class="string">&#x27;js&#x27;</span>, <span class="string">&#x27;css&#x27;</span>],</span><br><span class="line">    <span class="comment">// Run the build command with an extra argument to</span></span><br><span class="line">    <span class="comment">// View the bundle analyzer report after build finishes:</span></span><br><span class="line">    <span class="comment">// `npm run build --report`</span></span><br><span class="line">    <span class="comment">// Set to `true` or `false` to always turn it on or off</span></span><br><span class="line">    <span class="attr">bundleAnalyzerReport</span>: process.<span class="property">env</span>.<span class="property">npm_config_report</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">dev</span>: &#123;</span><br><span class="line">    <span class="attr">env</span>: <span class="built_in">require</span>(<span class="string">&#x27;./dev.env&#x27;</span>),</span><br><span class="line">    <span class="attr">port</span>: <span class="number">8080</span>,</span><br><span class="line">    <span class="attr">autoOpenBrowser</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">assetsSubDirectory</span>: <span class="string">&#x27;static&#x27;</span>,</span><br><span class="line">    <span class="attr">assetsPublicPath</span>: <span class="string">&#x27;/&#x27;</span>,</span><br><span class="line">    <span class="attr">proxyTable</span>: &#123;&#125;,</span><br><span class="line">    <span class="comment">// CSS Sourcemaps off by default because relative paths are &quot;buggy&quot;</span></span><br><span class="line">    <span class="comment">// with this option, according to the CSS-Loader README</span></span><br><span class="line">    <span class="comment">// (https://github.com/webpack/css-loader#sourcemaps)</span></span><br><span class="line">    <span class="comment">// In our experience, they generally work as expected,</span></span><br><span class="line">    <span class="comment">// just be aware of this issue when enabling this option.</span></span><br><span class="line">    <span class="attr">cssSourceMap</span>: <span class="literal">false</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>还有就是build文件夹下面两个比较简单的文件<br>dev-client.js似乎没有使用到，代码也比较简单，这里不多讲。<br>check-version.js完成对node和npm的版本检测</p>
+<hr>
+<p>之前没学webpack&amp;vue的时候用这个cli工具用的比较蛋疼，然后刚好有时间去看下这里面的配置。<br>还是熟悉了很多，至少知道了这些代码的意义，做的事情的哪些。算是对webpack这个打包工具的初识吧。</p>
+<blockquote>
+<p>本文多处源于：<a target="_blank" rel="noopener" href="http://blog.csdn.net/hongchh/article/details/55113751">vue-cli的webpack模板项目配置文件分析</a><br>感谢大佬的分享，此处仅做笔记。</p>
+</blockquote>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/09/03/Vue%E6%BA%90%E7%A0%81%E8%A7%A3%E6%9E%90-Flow&%E7%9B%AE%E5%BD%95%E8%AE%BE%E8%AE%A1/" rel="prev" title="Vue源码解析-Flow&目录设计">
+      <i class="fa fa-chevron-left"></i> Vue源码解析-Flow&目录设计
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2018/09/13/es6%E5%AD%A6%E4%B9%A0%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%80%EF%BC%89/" rel="next" title="es6新特性初体验（一）">
+      es6新特性初体验（一） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-cli%E8%84%9A%E6%89%8B%E6%9E%B6%E5%B7%A5%E5%85%B7%E7%9A%84%E7%86%9F%E6%82%89%E4%B8%8E%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">vue-cli脚手架工具的熟悉与配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#bulid%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">1.0.1.</span> <span class="nav-text">bulid文件夹</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#config%E6%96%87%E4%BB%B6%E5%A4%B9"><span class="nav-number">1.0.2.</span> <span class="nav-text">config文件夹</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="elmer li"
+      src="https://blog-1256757196.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">elmer li</p>
+  <div class="site-description" itemprop="description">生活不止眼前的苟且，要看向远方</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+  <div class="widget-wrap">
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="220" height="220" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript%EF%BC%8CJQuery/" rel="tag">JavaScript，JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Typescript/" rel="tag">Typescript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" rel="tag">前端安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E5%B7%A5%E5%85%B7/" rel="tag">前端，工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%EF%BC%8C%E6%96%87%E7%AB%A0/" rel="tag">博客，文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" rel="tag">构建工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">8</span></li></ul>
+          </canvas>
+      </div>
+  </div>
+
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Tanelmer" title="GitHub → https://github.com/Tanelmer" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/elmerlixinyi" title="Weibo → https://weibo.com/elmerlixinyi" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jeizas.me/" title="http://www.jeizas.me/" rel="noopener" target="_blank">jeizas</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.vlsion.top/" title="http://www.vlsion.top/" rel="noopener" target="_blank">vlsion</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://101.35.17.130/" title="http://101.35.17.130/" rel="noopener" target="_blank">作草分茶</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">elmer li</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdnjs.cloudflare.com/ajax/libs/valine/1.4.18/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'UoVbSVpFWSCR4s977vJ8Wg6d-gzGzoHsz',
+      appKey     : '8e00hPe2wOJ5Xf1PVqj9tSwh',
+      placeholder: "来都来了，说点什么吧。。",
+      avatar     : 'wavatar',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
