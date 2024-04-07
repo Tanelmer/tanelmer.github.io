@@ -1,1 +1,1 @@
-scp -r /Users/lixinyi/project/Blog/Hexo root@121.5.144.121:/root/
+rsync -av --exclude='node_modules' /Users/lixinyi/Blog/Hexo/ root@121.5.144.121:/root/Hexo/
