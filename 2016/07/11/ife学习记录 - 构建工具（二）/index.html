@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tanelmer.coding.me","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前端工程化，工具少不了，grunt、gulp、webpack、新出的parcel，一个接一个，先熟悉熟悉parcel和webpack。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ife学习记录 - 构建工具（二）">
+<meta property="og:url" content="http://tanelmer.coding.me/tanelmer/2016/07/11/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="elmer - 尘埃落定">
+<meta property="og:description" content="前端工程化，工具少不了，grunt、gulp、webpack、新出的parcel，一个接一个，先熟悉熟悉parcel和webpack。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-07-10T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-02T11:59:55.000Z">
+<meta property="article:author" content="elmer li">
+<meta property="article:tag" content="构建工具">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://tanelmer.coding.me/tanelmer/2016/07/11/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>ife学习记录 - 构建工具（二） | elmer - 尘埃落定</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb688712cefd32171d64e51724471c15";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">elmer - 尘埃落定</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱学习，爱生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tanelmer.coding.me/tanelmer/2016/07/11/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-1256757196.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+      <meta itemprop="name" content="elmer li">
+      <meta itemprop="description" content="生活不止眼前的苟且，要看向远方">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="elmer - 尘埃落定">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ife学习记录 - 构建工具（二）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2016-07-11 00:00:00" itemprop="dateCreated datePublished" datetime="2016-07-11T00:00:00+08:00">2016-07-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-02 19:59:55" itemprop="dateModified" datetime="2024-01-02T19:59:55+08:00">2024-01-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" itemprop="url" rel="index"><span itemprop="name">构建工具</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2016/07/11/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2016/07/11/ife%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%20-%20%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.6k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">前端工程化，工具少不了，grunt、gulp、webpack、新出的parcel，一个接一个，先熟悉熟悉parcel和webpack。</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="构建工具（webpack）"><a href="#构建工具（webpack）" class="headerlink" title="构建工具（webpack）"></a>构建工具（webpack）</h1><h2 id="webpack-时下最热门的模块打包器"><a href="#webpack-时下最热门的模块打包器" class="headerlink" title="webpack - 时下最热门的模块打包器"></a>webpack - 时下最热门的模块打包器</h2><p>webpack是一个前端资源加载&#x2F;打包工具。它将根据模块的依赖关系进行静态分析，然后将这些模块按照指定的规则生成对应的静态资源。  </p>
+<span id="more"></span>
+<p>webpack很早就出来了，之前也有用过，但是也仅仅限于简单应用，后面用vur-cli脚手架的时候觉得配置还是挺多的，然后就找了些关于vue-cli里webpack配置的资料了解下，也做了点笔记。<br><a target="_blank" rel="noopener" href="https://elmerlxy.com/2018/04/29/webpack-vue-cli%E9%85%8D%E7%BD%AE%E8%AF%A6%E8%A7%A3/">webpack-vue-cli配置详解</a></p>
+<blockquote>
+<h2 id="vue-cli-命令行工具"><a href="#vue-cli-命令行工具" class="headerlink" title="vue-cli 命令行工具"></a>vue-cli 命令行工具</h2><p>为单页面应用快速搭建 (SPA) 繁杂的脚手架。它为现代前端工作流提供了 batteries-included 的构建设置。只需要几分钟的时间就可以运行起来并带有热重载、保存时 lint 校验，以及生产环境可用的构建版本。</p>
+</blockquote>
+<h2 id="webpack文档阅读-amp-实践"><a href="#webpack文档阅读-amp-实践" class="headerlink" title="webpack文档阅读&amp;实践"></a>webpack文档阅读&amp;实践</h2><p>文档嘛就不用说了，当你想要了解一个之前未了解过的技术时，读文档可能是入门最快的方式，而后加上一些实践，基本上对这玩意就会有一个大概的了解。<br><a target="_blank" rel="noopener" href="https://webpack.docschina.org/concepts/">webpack中文文档</a>  </p>
+<h3 id="webpack有几个核心概念"><a href="#webpack有几个核心概念" class="headerlink" title="webpack有几个核心概念"></a>webpack有几个核心概念</h3><ul>
+<li>入口（entry）</li>
+<li>输出（output）</li>
+<li>加载器（loader）</li>
+<li>插件（plugins）</li>
+</ul>
+<hr>
+<h3 id="入口：打包的起始文件。"><a href="#入口：打包的起始文件。" class="headerlink" title="入口：打包的起始文件。"></a>入口：打包的起始文件。</h3><p>这里有两种区分，一种是单页面文件入口，还有一种是多页面文件入口。<br>语法也有区分，单页和多页传参是不一样的，对应对象和数组。<br>webpack.config.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//单页面入口</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">app</span>: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line">    <span class="attr">vendors</span>: <span class="string">&#x27;./src/vendors.js&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//多页面入口</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">pageOne</span>: <span class="string">&#x27;./src/pageOne/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">pageTwo</span>: <span class="string">&#x27;./src/pageTwo/index.js&#x27;</span>,</span><br><span class="line">    <span class="attr">pageThree</span>: <span class="string">&#x27;./src/pageThree/index.js&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="输出配置也搭配的入口规则来的"><a href="#输出配置也搭配的入口规则来的" class="headerlink" title="输出配置也搭配的入口规则来的"></a>输出配置也搭配的入口规则来的</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//单页输出</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;bundle.js&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/home/proj/public/assets&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//多页输出</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">entry</span>: &#123;</span><br><span class="line">    <span class="attr">app</span>: <span class="string">&#x27;./src/app.js&#x27;</span>,</span><br><span class="line">    <span class="attr">search</span>: <span class="string">&#x27;./src/search.js&#x27;</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">filename</span>: <span class="string">&#x27;[name].js&#x27;</span>,</span><br><span class="line">    <span class="attr">path</span>: __dirname + <span class="string">&#x27;/dist&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 写入到硬盘：./dist/app.js, ./dist/search.js</span></span><br></pre></td></tr></table></figure>
+<p>有个需要注意的地方就是，你可能有需求将输出文件路径配置到cnd上，并在文件末尾加上hash来去除缓存，这里有个publicPath的配置项，可以满足你的需求。  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="comment">//...</span></span><br><span class="line">  <span class="attr">output</span>: &#123;</span><br><span class="line">    <span class="attr">path</span>: <span class="string">&#x27;/home/proj/cdn/assets/[hash]&#x27;</span>,</span><br><span class="line">    <span class="attr">publicPath</span>: <span class="string">&#x27;http://cdn.example.com/assets/[hash]/&#x27;</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>关于path和publicPath的区别。这篇webpack解惑讲的很全很清晰。<br><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/dcb28b582318">文章链接</a></p>
+<blockquote>
+<p>“path”仅仅告诉Webpack结果存储在哪里，然而“publicPath”项则被许多Webpack的插件用于在生产模式下更新内嵌到css、html文件里的url值。<br>例如，在localhost（译者注：即本地开发模式）里的css文件中边你可能用“.&#x2F;test.png”这样的url来加载图片，但是在生产模式下“test.png”文件可能会定位到CDN上并且你的Node.js服务器可能是运行在HeroKu上边的。这就意味着在生产环境你必须手动更新所有文件里的url为CDN的路径。<br>然而你也可以使用Webpack的“publicPath”选项和一些插件来在生产模式下编译输出文件时自动更新这些url。  </p>
+</blockquote>
+<h3 id="加载器-loader-VS-插件-plugin"><a href="#加载器-loader-VS-插件-plugin" class="headerlink" title="加载器(loader) VS 插件(plugin)"></a>加载器(loader) VS 插件(plugin)</h3><p>文档解释  </p>
+<blockquote>
+<p>loader 类似于其他构建工具中“任务(task)”，并提供了处理前端构建步骤的强大方法。loader 可以将文件从不同的语言（如 TypeScript）转换为 JavaScript，或将内联图像转换为 data URL。loader 甚至允许你直接在 JavaScript 模块中 import CSS文件！<br>之前我总感觉loader跟plugin是一个玩意，只不过是语法引用方面有些不同，都是webpack的一些扩展，后面才发现这其中有些复杂的关系。。。  </p>
+</blockquote>
+<p>功能思想上的区别：</p>
+<blockquote>
+<p>loader 用于加载某些资源文件。 因为webpack 本身只能打包commonjs规范的js文件，对于其他资源例如 css，图片，或者其他的语法集，比如 jsx， coffee，是没有办法加载的。 这就需要对应的loader将资源转化，加载进来。从字面意思也能看出，loader是用于加载的，它作用于一个个文件上。<br>plugin 用于扩展webpack的功能。它直接作用于 webpack，扩展了它的功能。当然loader也时变相的扩展了 webpack ，但是它只专注于转化文件（transform）这一个领域。而plugin的功能更加的丰富，而不仅局限于资源的加载。</p>
+</blockquote>
+<p>这样一解释基本就知道了loader和plugin功能定义上的区别了。  </p>
+<h3 id="还有更多-more"><a href="#还有更多-more" class="headerlink" title="还有更多(more)"></a>还有更多(more)</h3><p>其实webpack的知识点远不至于此，例如manifest、target、模块依赖等等，有很多东西只有在实际应用中才能了解，之后会在自己项目中应用下来深入下webpack这个工具。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" rel="tag"><i class="fa fa-tag"></i> 构建工具</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2016/07/09/scroll-JQuery/" rel="prev" title="JQuery-rolling无缝向上滚动">
+      <i class="fa fa-chevron-left"></i> JQuery-rolling无缝向上滚动
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2016/07/18/JS-error/" rel="next" title="JS异常处理">
+      JS异常处理 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7%EF%BC%88webpack%EF%BC%89"><span class="nav-number">1.</span> <span class="nav-text">构建工具（webpack）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack-%E6%97%B6%E4%B8%8B%E6%9C%80%E7%83%AD%E9%97%A8%E7%9A%84%E6%A8%A1%E5%9D%97%E6%89%93%E5%8C%85%E5%99%A8"><span class="nav-number">1.1.</span> <span class="nav-text">webpack - 时下最热门的模块打包器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#vue-cli-%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7"><span class="nav-number">1.2.</span> <span class="nav-text">vue-cli 命令行工具</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#webpack%E6%96%87%E6%A1%A3%E9%98%85%E8%AF%BB-amp-%E5%AE%9E%E8%B7%B5"><span class="nav-number">1.3.</span> <span class="nav-text">webpack文档阅读&amp;实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#webpack%E6%9C%89%E5%87%A0%E4%B8%AA%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="nav-number">1.3.1.</span> <span class="nav-text">webpack有几个核心概念</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%A5%E5%8F%A3%EF%BC%9A%E6%89%93%E5%8C%85%E7%9A%84%E8%B5%B7%E5%A7%8B%E6%96%87%E4%BB%B6%E3%80%82"><span class="nav-number">1.3.2.</span> <span class="nav-text">入口：打包的起始文件。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BE%93%E5%87%BA%E9%85%8D%E7%BD%AE%E4%B9%9F%E6%90%AD%E9%85%8D%E7%9A%84%E5%85%A5%E5%8F%A3%E8%A7%84%E5%88%99%E6%9D%A5%E7%9A%84"><span class="nav-number">1.3.3.</span> <span class="nav-text">输出配置也搭配的入口规则来的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%99%A8-loader-VS-%E6%8F%92%E4%BB%B6-plugin"><span class="nav-number">1.3.4.</span> <span class="nav-text">加载器(loader) VS 插件(plugin)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%BF%98%E6%9C%89%E6%9B%B4%E5%A4%9A-more"><span class="nav-number">1.3.5.</span> <span class="nav-text">还有更多(more)</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="elmer li"
+      src="https://blog-1256757196.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">elmer li</p>
+  <div class="site-description" itemprop="description">生活不止眼前的苟且，要看向远方</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+  <div class="widget-wrap">
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="220" height="220" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript%EF%BC%8CJQuery/" rel="tag">JavaScript，JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Typescript/" rel="tag">Typescript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" rel="tag">前端安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E5%B7%A5%E5%85%B7/" rel="tag">前端，工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%EF%BC%8C%E6%96%87%E7%AB%A0/" rel="tag">博客，文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" rel="tag">构建工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">10</span></li></ul>
+          </canvas>
+      </div>
+  </div>
+
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Tanelmer" title="GitHub → https://github.com/Tanelmer" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/elmerlixinyi" title="Weibo → https://weibo.com/elmerlixinyi" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jeizas.me/" title="http://www.jeizas.me/" rel="noopener" target="_blank">jeizas</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.vlsion.top/" title="http://www.vlsion.top/" rel="noopener" target="_blank">vlsion</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://101.35.17.130/" title="http://101.35.17.130/" rel="noopener" target="_blank">作草分茶</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">elmer li</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">浙ICP备2021018214号-1 </a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdnjs.cloudflare.com/ajax/libs/valine/1.4.18/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'UoVbSVpFWSCR4s977vJ8Wg6d-gzGzoHsz',
+      appKey     : '8e00hPe2wOJ5Xf1PVqj9tSwh',
+      placeholder: "来都来了，说点什么吧。。",
+      avatar     : 'wavatar',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

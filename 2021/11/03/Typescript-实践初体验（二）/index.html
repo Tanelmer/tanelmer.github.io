@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.1.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"tanelmer.coding.me","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":true,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="Typescript 学习记录（二）">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Typescript-实践初体验（二）">
+<meta property="og:url" content="http://tanelmer.coding.me/tanelmer/2021/11/03/Typescript-%E5%AE%9E%E8%B7%B5%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89/index.html">
+<meta property="og:site_name" content="elmer - 尘埃落定">
+<meta property="og:description" content="Typescript 学习记录（二）">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-11-02T16:00:00.000Z">
+<meta property="article:modified_time" content="2024-01-02T11:59:55.000Z">
+<meta property="article:author" content="elmer li">
+<meta property="article:tag" content="javascript">
+<meta property="article:tag" content="前端">
+<meta property="article:tag" content="Typescript">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://tanelmer.coding.me/tanelmer/2021/11/03/Typescript-%E5%AE%9E%E8%B7%B5%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>Typescript-实践初体验（二） | elmer - 尘埃落定</title>
+  
+
+
+  <script>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?eb688712cefd32171d64e51724471c15";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">elmer - 尘埃落定</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">爱学习，爱生活</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://tanelmer.coding.me/tanelmer/2021/11/03/Typescript-%E5%AE%9E%E8%B7%B5%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://blog-1256757196.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+      <meta itemprop="name" content="elmer li">
+      <meta itemprop="description" content="生活不止眼前的苟且，要看向远方">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="elmer - 尘埃落定">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Typescript-实践初体验（二）
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-11-03 00:00:00" itemprop="dateCreated datePublished" datetime="2021-11-03T00:00:00+08:00">2021-11-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2024-01-02 19:59:55" itemprop="dateModified" datetime="2024-01-02T19:59:55+08:00">2024-01-02</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Typescript/" itemprop="url" rel="index"><span itemprop="name">Typescript</span></a>
+                </span>
+            </span>
+
+          
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="far fa-comment"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/11/03/Typescript-%E5%AE%9E%E8%B7%B5%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/11/03/Typescript-%E5%AE%9E%E8%B7%B5%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%88%E4%BA%8C%EF%BC%89/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  <br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="far fa-file-word"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>1.7k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="far fa-clock"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>2 分钟</span>
+            </span>
+            <div class="post-description">Typescript 学习记录（二）</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p><a name="a7OwN"></a></p>
+<h3 id="联合类型"><a href="#联合类型" class="headerlink" title="联合类型"></a>联合类型</h3><p>联合类型（Union Types）表示取值可以为多种类型中的一种。</p>
+<span id="more"></span>
+
+<p>联合类型使用 | 分隔每个类型。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">myNum</span>: string | number;</span><br><span class="line">myNum = <span class="string">&#x27;seven&#x27;</span>;</span><br><span class="line">myNum = <span class="number">7</span>;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> <span class="attr">myNum</span>: string | number;</span><br><span class="line">myNum = <span class="literal">true</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// index.ts(2,1): error TS2322: Type &#x27;boolean&#x27; is not assignable to type &#x27;string | number&#x27;.</span></span><br><span class="line"><span class="comment">//   Type &#x27;boolean&#x27; is not assignable to type &#x27;number&#x27;.</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="对象的类型——接口"><a href="#对象的类型——接口" class="headerlink" title="对象的类型——接口"></a>对象的类型——接口</h3><p>在面向对象语言中，接口（Interfaces）是一个很重要的概念，它是对行为的抽象，而具体如何行动需要由类（classes）去实现（implement）。</p>
+<p>TypeScript 中的接口是一个非常灵活的概念，除了可用于对类的一部分行为进行抽象以外，也常用于对「对象的形状（Shape）」进行描述。</p>
+<h4 id="可选属性"><a href="#可选属性" class="headerlink" title="可选属性"></a>可选属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">interface <span class="title class_">Person</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: string;</span><br><span class="line">  age?: number; <span class="comment">// 可选</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="任意属性"><a href="#任意属性" class="headerlink" title="任意属性"></a>任意属性</h4><p>使用 [propName: string] 定义了任意属性取 string 类型的值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">interface <span class="title class_">Person</span> &#123;</span><br><span class="line">  <span class="attr">name</span>: string;</span><br><span class="line">  age?: number;</span><br><span class="line">  [<span class="attr">propName</span>: string]: any;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>一旦定义了任意属性，那么确定属性和可选属性的类型都必须是它的类型的子集：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">interface <span class="title class_">Person</span> &#123;</span><br><span class="line">    <span class="attr">name</span>: string;</span><br><span class="line">    age?: number;</span><br><span class="line">    [<span class="attr">propName</span>: string]: string; <span class="comment">// 其余属性必须是string</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> <span class="attr">tom</span>: <span class="title class_">Person</span> = &#123;</span><br><span class="line">    <span class="attr">name</span>: <span class="string">&#x27;Tom&#x27;</span>,</span><br><span class="line">    <span class="attr">age</span>: <span class="number">25</span>,</span><br><span class="line">    <span class="attr">gender</span>: <span class="string">&#x27;male&#x27;</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// index.ts(3,5): error TS2411: Property &#x27;age&#x27; of type &#x27;number&#x27; is not assignable to string index type &#x27;string&#x27;.</span></span><br><span class="line"><span class="comment">// index.ts(7,5): error TS2322: Type &#x27;&#123; [x: string]: string | number; name: string; age: number; gender: string; &#125;&#x27; is not assignable to type &#x27;Person&#x27;.</span></span><br><span class="line"><span class="comment">//   Index signatures are incompatible.</span></span><br><span class="line"><span class="comment">//     Type &#x27;string | number&#x27; is not assignable to type &#x27;string&#x27;.</span></span><br><span class="line"><span class="comment">//       Type &#x27;number&#x27; is not assignable to type &#x27;string&#x27;.</span></span><br></pre></td></tr></table></figure>
+
+<p>更多接口信息可参考 <a target="_blank" rel="noopener" href="https://juejin.cn/post/6855449252785717256">https://juejin.cn/post/6855449252785717256</a></p>
+<h3 id="声明文件"><a href="#声明文件" class="headerlink" title="声明文件"></a>声明文件</h3><p>当使用第三方库时，我们需要引用它的声明文件，才能获得对应的代码补全、接口提示等功能。</p>
+<h4 id="声明类型"><a href="#声明类型" class="headerlink" title="声明类型"></a>声明类型</h4><ul>
+<li>declare var 声明全局变量</li>
+<li>declare function 声明全局方法</li>
+<li>declare class 声明全局类</li>
+<li>declare enum 声明全局枚举类型</li>
+<li>declare namespace 声明（含有子属性的）全局对象</li>
+<li>interface 和 type 声明全局类型</li>
+<li>export 导出变量</li>
+<li>export namespace*  导出（含有子属性的）对象</li>
+<li>export default ES6 默认导出</li>
+<li>export &#x3D; commonjs 导出模块</li>
+<li>export as namespace UMD 库声明全局变量</li>
+<li>declare global 扩展全局变量</li>
+<li>declare module 扩展模块</li>
+<li>&#x2F;&#x2F;&#x2F; &lt; reference &#x2F;&gt; 三斜线指令</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          
+          <div class="post-tags">
+              <a href="/tags/javascript/" rel="tag"><i class="fa fa-tag"></i> javascript</a>
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"><i class="fa fa-tag"></i> 前端</a>
+              <a href="/tags/Typescript/" rel="tag"><i class="fa fa-tag"></i> Typescript</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/10/13/%E5%AF%B9%E4%BA%8E%E5%9B%BD%E5%BA%86%E5%8A%A0%E7%8F%AD%E7%9A%84%E4%B8%80%E4%BA%9B%E6%83%B3%E6%B3%95/" rel="prev" title="对于国庆加班的一些想法">
+      <i class="fa fa-chevron-left"></i> 对于国庆加班的一些想法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/05/Typescript-%E5%AE%9E%E8%B7%B5%E5%88%9D%E4%BD%93%E9%AA%8C%EF%BC%88%E4%B8%89%EF%BC%89/" rel="next" title="Typescript-实践初体验（三）">
+      Typescript-实践初体验（三） <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%81%94%E5%90%88%E7%B1%BB%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">联合类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%B9%E8%B1%A1%E7%9A%84%E7%B1%BB%E5%9E%8B%E2%80%94%E2%80%94%E6%8E%A5%E5%8F%A3"><span class="nav-number">2.</span> <span class="nav-text">对象的类型——接口</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%AF%E9%80%89%E5%B1%9E%E6%80%A7"><span class="nav-number">2.1.</span> <span class="nav-text">可选属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%BB%E6%84%8F%E5%B1%9E%E6%80%A7"><span class="nav-number">2.2.</span> <span class="nav-text">任意属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">声明文件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A3%B0%E6%98%8E%E7%B1%BB%E5%9E%8B"><span class="nav-number">3.1.</span> <span class="nav-text">声明类型</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="elmer li"
+      src="https://blog-1256757196.cos.ap-nanjing.myqcloud.com/images/avatar.jpg">
+  <p class="site-author-name" itemprop="name">elmer li</p>
+  <div class="site-description" itemprop="description">生活不止眼前的苟且，要看向远方</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">46</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+  </nav>
+</div>
+
+
+  <script type="text/javascript" charset="utf-8" src="/js/tagcloud.js"></script>
+  <script type="text/javascript" charset="utf-8" src="/js/tagcanvas.js"></script>
+  <div class="widget-wrap">
+      <div id="myCanvasContainer" class="widget tagcloud">
+          <canvas width="220" height="220" id="resCanvas" style="width=100%">
+              <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/HTTP/" rel="tag">HTTP</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript/" rel="tag">JavaScript</a><span class="tag-list-count">10</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/JavaScript%EF%BC%8CJQuery/" rel="tag">JavaScript，JQuery</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OS/" rel="tag">OS</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Typescript/" rel="tag">Typescript</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Vue/" rel="tag">Vue</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/git/" rel="tag">git</a><span class="tag-list-count">4</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/" rel="tag">javascript</a><span class="tag-list-count">8</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/node/" rel="tag">node</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag">前端</a><span class="tag-list-count">12</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%E5%AE%89%E5%85%A8/" rel="tag">前端安全</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%89%8D%E7%AB%AF%EF%BC%8C%E5%B7%A5%E5%85%B7/" rel="tag">前端，工具</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E5%8D%9A%E5%AE%A2%EF%BC%8C%E6%96%87%E7%AB%A0/" rel="tag">博客，文章</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E6%9E%84%E5%BB%BA%E5%B7%A5%E5%85%B7/" rel="tag">构建工具</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/" rel="tag">设计模式</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/%E9%9A%8F%E7%AC%94/" rel="tag">随笔</a><span class="tag-list-count">10</span></li></ul>
+          </canvas>
+      </div>
+  </div>
+
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Tanelmer" title="GitHub → https://github.com/Tanelmer" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/elmerlixinyi" title="Weibo → https://weibo.com/elmerlixinyi" rel="noopener" target="_blank"><i class="fab fa-weibo fa-fw"></i>Weibo</a>
+      </span>
+  </div>
+
+
+  <div class="links-of-blogroll motion-element">
+    <div class="links-of-blogroll-title"><i class="fa fa-link fa-fw"></i>
+      友情链接
+    </div>
+    <ul class="links-of-blogroll-list">
+        <li class="links-of-blogroll-item">
+          <a href="http://www.jeizas.me/" title="http://www.jeizas.me/" rel="noopener" target="_blank">jeizas</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://www.vlsion.top/" title="http://www.vlsion.top/" rel="noopener" target="_blank">vlsion</a>
+        </li>
+        <li class="links-of-blogroll-item">
+          <a href="http://101.35.17.130/" title="http://101.35.17.130/" rel="noopener" target="_blank">作草分茶</a>
+        </li>
+    </ul>
+  </div>
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        <div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2024</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">elmer li</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://pisces.theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> 强力驱动
+  </div>
+  <div class="beian"><a href="https://beian.miit.gov.cn" rel="noopener" target="_blank">浙ICP备2021018214号-1 </a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,0' opacity='0.5' zIndex='-1' count='99' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/jquery@3/dist/jquery.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/fancyapps/fancybox@3/dist/jquery.fancybox.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('https://cdnjs.cloudflare.com/ajax/libs/valine/1.4.18/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el         : '#valine-comments',
+      verify     : false,
+      notify     : false,
+      appId      : 'UoVbSVpFWSCR4s977vJ8Wg6d-gzGzoHsz',
+      appKey     : '8e00hPe2wOJ5Xf1PVqj9tSwh',
+      placeholder: "来都来了，说点什么吧。。",
+      avatar     : 'wavatar',
+      meta       : guest,
+      pageSize   : '10' || 10,
+      visitor    : false,
+      lang       : '' || 'zh-cn',
+      path       : location.pathname,
+      recordIP   : false,
+      serverURLs : ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
